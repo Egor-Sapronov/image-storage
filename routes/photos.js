@@ -4,10 +4,13 @@ var fs = require('fs');
 var join = path.join;
 var photos = [];
 
-exports.list = function (req, res) {
-    res.render('photos', {
-        title: 'Photos',
-        photos: photos
+exports.list = function (req, res, next) {
+    Photo.find({}, function (err, photos) {
+        if (err) return next(err);
+        res.render('photos', {
+            title: 'Photos',
+            photos: photos
+        });
     });
 };
 
