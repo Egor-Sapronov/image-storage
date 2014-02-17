@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Photos</title>
+    <title><%= title%></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1>Photos</h1>
+<h1><%= title%></h1>
 <p>Photo stock app.</p>
 <div id="photos">
     <% photos.forEach(function(photo){ %>
     <div class="photo">
         <h2><%=photo.name%></h2>
-        <img src="<%=photo.path%>"/>
+        <img src="/photos/<%=photo.path%>"/>
     </div>
     <%})%>
 </div>
