@@ -1,17 +1,8 @@
-var photos = [];
-photos.push({
-    name: 'Node.js logo',
-    path: 'http://nodejs.org/images/logos/nodejs-green.png'
-});
-photos.push({
-    name: 'Ryan Speaking',
-    path: 'http://nodejs.org/images/ryan-speaker.jpg'
-});
-
 var Photo = require('../models/Photo');
 var path = require('path');
 var fs = require('fs');
 var join = path.join;
+var photos = [];
 
 exports.list = function (req, res) {
     res.render('photos', {
@@ -20,13 +11,13 @@ exports.list = function (req, res) {
     });
 };
 
-exports.form = function (res, req) {
+exports.form = function (req, res) {
     res.render('photos/upload', {
         title: 'Photo upload'
     });
 };
 
-exports.submit = function (res, req) {
+exports.submit = function (dir) {
     return function (req, res, next) {
         var img = req.files.photo.image;
         var name = req.body.photo.name || img.name;
