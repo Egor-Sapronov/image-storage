@@ -40,3 +40,6 @@ exports.submit = function (dir) {
     };
 };
 
+exports.post=function(req, res){
+
+};
