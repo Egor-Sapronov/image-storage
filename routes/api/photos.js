@@ -1,6 +1,7 @@
 var Photo = require('../../models/Photo');
 var path = require('path');
 var fs = require('fs');
+var log=require('../../libs/log')(module);
 var join = path.join;
 
 exports.get = function (req, res) { // api/photos
@@ -9,6 +10,7 @@ exports.get = function (req, res) { // api/photos
            return res.send(photos);
        } else {
            res.statusCode=500;
+           log.error('Internal error(%d): %s', res.statusCode, err.message);
            return res.send({error:'Server error'});
        }
     });
@@ -22,6 +24,7 @@ exports.post = function (dir) {
 
         photo.save(function (err) {
             if (!err) {
+                log.info('photo creates')
                 res.statusCode = 200;
                 res.send({photo: photo});
 
@@ -32,6 +35,7 @@ exports.post = function (dir) {
                 fs.rename(photo.name, path, function (err) {
                     if (err) {
                         res.statusCode = 500;
+                        log.error('Internal error(%d): %s', res.statusCode, err.message);
                         res.send({error: 'Server error'});
                     }
                 });
@@ -43,6 +47,7 @@ exports.post = function (dir) {
                     res.statusCode = 500;
                     res.send({error: 'Server error'});
                 }
+                log.error('Internal error(%d): %s', res.statusCode, err.message);
             }
         });
     };
