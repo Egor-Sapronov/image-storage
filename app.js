@@ -9,6 +9,7 @@ var photosApi = require('./routes/api/photos');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var log = require('./libs/log')(module);
 
 var app = express();
 
@@ -38,11 +39,11 @@ app.get('/upload', photos.form);
 app.post('/upload', photos.submit(app.get('photos')));
 
 app.get('/api/photos', photosApi.get);
-app.post('/api/photos', photosApi.post);
+app.post('/api/photos', photosApi.post(app.get('photos')));
 app.get('/api/photos/:id', photosApi.getById);
 app.put('/api/photos/:id', photosApi.put);
 app.delete('/api/photos/:id', photosApi.delete);
 
 http.createServer(app).listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
+    log.info('Express server listening on port'+' '+app.get('port'));
 });
