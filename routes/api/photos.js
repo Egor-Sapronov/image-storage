@@ -28,11 +28,13 @@ exports.post = function (dir) {
                 res.statusCode = 200;
                 res.send({photo: photo});
 
+                var img = req.body.image;
+
                 var ext = photo.name.split('*').pop(); // Get file extension.
                 var fileName = photo.id + '.' + ext;
                 var path = join(dir, fileName);
 
-                fs.rename(photo.name, path, function (err) {
+                fs.rename(img.path, path, function (err) {
                     if (err) {
                         res.statusCode = 500;
                         log.error('Internal error(%d): %s', res.statusCode, err.message);
