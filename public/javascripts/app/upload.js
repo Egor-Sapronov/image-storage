@@ -1,11 +1,9 @@
 var viewModel = function () {
     var self = this;
 
-    self.name = ko.observable('');
     self.image = ko.observable();
 
     var data = {
-        name: self.name,
         image: self.image
     };
 

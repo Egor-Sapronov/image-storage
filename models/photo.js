@@ -13,8 +13,7 @@ db.once('open', function callback(){
 });
 
 var schema = mongoose.Schema({
-    name: String,
-    path: String
+    name: String
 });
 
 module.exports=mongoose.model('Photo', schema);

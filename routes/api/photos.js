@@ -19,7 +19,7 @@ exports.get = function (req, res) { // api/photos
 exports.post = function (dir) {
     return function (req, res) { // api/photos
         var photo = new Photo({
-            name: req.body.name
+            name: req.body.image.name
         });
 
         photo.save(function (err) {
@@ -30,7 +30,7 @@ exports.post = function (dir) {
 
                 var img = req.body.image;
 
-                var ext = photo.name.split('*').pop(); // Get file extension.
+                var ext = img.name.split('*').pop(); // Get file extension.
                 var fileName = photo.id + '.' + ext;
                 var path = join(dir, fileName);
 
