@@ -3,10 +3,7 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var photos = require('./routes/photos');
 var photosApi = require('./routes/api/photos');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var log = require('./libs/log')(module);
@@ -32,11 +29,7 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/', photos.list);
-app.get('/users', user.list);
-
-app.get('/upload', photos.form);
-app.post('/upload', photos.submit(app.get('photos')));
+app.get('/');
 
 app.get('/api/photos', photosApi.get);
 app.post('/api/photos', photosApi.post(app.get('photos')));

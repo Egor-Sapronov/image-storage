@@ -22,36 +22,9 @@ exports.post = function (dir) {
             name: req.body.image.name
         });
 
-        photo.save(function (err) {
-            if (!err) {
-                log.info('photo creates')
-                res.statusCode = 200;
-                res.send({photo: photo});
+        photo.save();
 
-                var img = req.body.image;
-
-                var ext = img.name.split('*').pop(); // Get file extension.
-                var fileName = photo.id + '.' + ext;
-                var path = join(dir, fileName);
-
-                fs.rename(img.path, path, function (err) {
-                    if (err) {
-                        res.statusCode = 500;
-                        log.error('Internal error(%d): %s', res.statusCode, err.message);
-                        res.send({error: 'Server error'});
-                    }
-                });
-            } else {
-                if (err.name == 'ValidationError') {
-                    res.statusCode = 400;
-                    res.send({error: 'Validation error'});
-                } else {
-                    res.statusCode = 500;
-                    res.send({error: 'Server error'});
-                }
-                log.error('Internal error(%d): %s', res.statusCode, err.message);
-            }
-        });
+        res.send(photo.name);
     };
 };
 
