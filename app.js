@@ -4,7 +4,8 @@
 
 var express = require('express');
 var http = require('http');
-var photos = require('./routes/photos');
+//var routes=require('./routes');
+var images = require('./routes/images');
 var path = require('path');
 var log = require('./libs/log')(module);
 
@@ -14,7 +15,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set('photos', __dirname + '/public/photos');
+app.set('images', __dirname + '/public/images');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -29,7 +30,7 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/', photos.list);
+app.get('/', images.list);
 
 http.createServer(app).listen(app.get('port'), function () {
     log.info('Express server listening on port'+' '+app.get('port'));
