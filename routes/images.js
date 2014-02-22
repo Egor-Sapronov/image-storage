@@ -6,7 +6,7 @@ var join = path.join;
 var photos = [];
 
 exports.list = function (req, res) {
-    res.render('photos', {
+    res.render('images', {
         title: 'Photos',
         photos: photos
     });
