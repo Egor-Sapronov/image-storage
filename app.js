@@ -3,8 +3,8 @@
  */
 
 var express = require('express');
-var photosApi = require('./routes/api/photos');
 var http = require('http');
+var photos = require('./routes/photos');
 var path = require('path');
 var log = require('./libs/log')(module);
 
@@ -29,13 +29,7 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/');
-
-app.get('/api/photos', photosApi.get);
-app.post('/api/photos', photosApi.post(app.get('photos')));
-app.get('/api/photos/:id', photosApi.getById);
-app.put('/api/photos/:id', photosApi.put);
-app.delete('/api/photos/:id', photosApi.delete);
+app.get('/', photos.list);
 
 http.createServer(app).listen(app.get('port'), function () {
     log.info('Express server listening on port'+' '+app.get('port'));
