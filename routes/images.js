@@ -22,18 +22,25 @@ exports.submit = function (dir) {
     return function (req, res, next) {
         var img = req.files.image.file;
         var name = req.body.image.name || img.name;
-        var path = join(dir, img.name);
 
-        fs.rename(img.path, path, function (err) {
-            if (err) return next(err);
+        var ext = img.name.split('*').pop();
 
-            Image.create({
-                name: name,
-                path: img.name
-            }, function (err) {
+        var tempImage = new Image();
+        tempImage.name = name;
+
+        tempImage.save(function (err, image) {
+            var path = join(dir, image.id + '.' + ext);
+
+            fs.writeFile(path, img.buffer, function (err) {
                 if (err) return next(err);
                 res.redirect('/');
             });
+        })
+
+        var path = join(dir, Image.id + '.' + ext);
+
+        fs.rename(img.path, path, function (err) {
+            if (err) return next(err);
         });
     };
 };
