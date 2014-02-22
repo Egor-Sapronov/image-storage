@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-        <html>
+<html>
 <head>
-    <title><%= title%>></title>
+    <title><%= title %>></title>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
 <h1></h1>
+
 <p></p>
+
 <div id="photos">
-    <% photos.foreach(function(photo){%>
+    <% photos.foreach(function(photo){ %>
     <div class="photo">
-        <h2><%= photo.name%></h2>
-        <img src="<%= photo.path%>" />
+        <h2><%= photo.name %></h2>
+        <img src="<%= photo.path %>"/>
     </div>
-    <%})%>
+    <% }) %>
 </div>
 </body>
 </html>
