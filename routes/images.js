@@ -3,9 +3,9 @@ var path = require('path');
 var fs = require('fs');
 var join = path.join;
 
-var images = [];
 
 exports.list = function (req, res, next) {
+    var images = [];
     Image.find({}, function (err, images) {
         if (err) return next(err);
         res.render('images', {
@@ -25,21 +25,21 @@ exports.submit = function (dir) {
     return function (req, res, next) {
         var img = req.files.image.file;
         var name = req.body.image.name || img.name;
-
         var ext = img.name.split('.').pop();
 
-        var tempImage = new Image();
-        tempImage.name = name;
+        var image = new Image();
+        image.save(function (err, image) {
+            var fileName = image.id + '.' + ext;
+            var path = join(dir, fileName);
 
-        tempImage.save(function (err, image) {
-            var path = join(dir, image.id + '.' + ext);
-
-            image.path = image.id + '.' + ext;
-            image.save();
-
-            fs.rename(img.path, path, function (err) {
+            image.name = name;
+            image.path = fileName;
+            image.save(function (err) {
                 if (err) return next(err);
-                res.redirect('/');
+                fs.rename(img.path, path, function (err) {
+                    if (err) return next(err);
+                    res.redirect('/');
+                });
             });
         });
     };
