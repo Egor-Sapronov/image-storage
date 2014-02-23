@@ -10,10 +10,9 @@
 <p></p>
 
 <div id="photos">
-    <% photos.forEach(function(photo){ %>
+    <% images.forEach(function(image){ %>
     <div class="photo">
-        <h2><%= photo.name %></h2>
-        <img src="<%= photo.path %>"/>
+        <h2><%= image.name %></h2>
     </div>
     <% }) %>
 </div>
