@@ -34,6 +34,9 @@ exports.submit = function (dir) {
         tempImage.save(function (err, image) {
             var path = join(dir, image.id + '.' + ext);
 
+            image.path = image.id + '.' + ext;
+            image.save();
+
             fs.rename(img.path, path, function (err) {
                 if (err) return next(err);
                 res.redirect('/');
