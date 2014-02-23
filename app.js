@@ -8,6 +8,7 @@ var http = require('http');
 var images = require('./routes/images');
 var path = require('path');
 var log = require('./libs/log')(module);
+var imagesApi=require('./routes/api/images');
 
 var app = express();
 
@@ -29,6 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
+
+app.get('/api/images', imagesApi.get);
+app.get('/api/images/:id', imagesApi.getId);
 
 app.get('/', images.list);
 
