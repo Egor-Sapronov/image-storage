@@ -3,12 +3,15 @@ var path = require('path');
 var fs = require('fs');
 var join = path.join;
 
-var photos = [];
+var images = [];
 
-exports.list = function (req, res) {
-    res.render('images', {
-        title: 'Photos',
-        photos: photos
+exports.list = function (req, res, next) {
+    Image.find({}, function (err, images) {
+        if (err) return next(err);
+        res.render('images', {
+            title: 'Images',
+            images: images
+        });
     });
 };
 
