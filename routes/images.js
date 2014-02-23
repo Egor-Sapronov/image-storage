@@ -26,7 +26,7 @@ exports.submit = function (dir) {
         var img = req.files.image.file;
         var name = req.body.image.name || img.name;
 
-        var ext = img.name.split('*').pop();
+        var ext = img.name.split('.').pop();
 
         var tempImage = new Image();
         tempImage.name = name;
@@ -34,16 +34,10 @@ exports.submit = function (dir) {
         tempImage.save(function (err, image) {
             var path = join(dir, image.id + '.' + ext);
 
-            fs.writeFile(path, img.buffer, function (err) {
+            fs.rename(img.path, path, function (err) {
                 if (err) return next(err);
                 res.redirect('/');
             });
-        })
-
-        var path = join(dir, Image.id + '.' + ext);
-
-        fs.rename(img.path, path, function (err) {
-            if (err) return next(err);
         });
     };
 };
