@@ -13,6 +13,7 @@
     <% images.forEach(function(image){ %>
     <div class="photo">
         <h2><%= image.name %></h2>
+        <img src="/images/<%= image.path %>">
     </div>
     <% }) %>
 </div>
