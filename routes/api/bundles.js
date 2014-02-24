@@ -2,7 +2,7 @@ var Bundle = require('../../models/models').Bundle;
 var log = require('../../libs/log')(module);
 
 exports.get = function (req, res) {
-    Bundle.find({}, function (err, bundles) {
+    return Bundle.find({}, function (err, bundles) {
         if (!err) return res.send(bundles);
         else {
             res.statusCode = 500;
@@ -13,7 +13,27 @@ exports.get = function (req, res) {
 };
 
 exports.post = function (req, res) {
-    res.send('Not implemented.');
+    var bundle = new Bundle({
+        name: req.body.name,
+        imagesId: body.imagesId
+    });
+
+    bundle.save(function (err) {
+        if (!err) {
+            log.info('bundle created');
+            return res.send({status: 'OK', bundle: bundle});
+        } else {
+            console.log(err);
+            if (err.name == 'ValidationError') {
+                res.statusCode = 400;
+                res.send({ error: 'Validation error' });
+            } else {
+                res.statusCode = 500;
+                res.send({ error: 'Server error' });
+            }
+            log.error('Internal error(%d): %s', res.statusCode, err.message);
+        }
+    });
 };
 
 exports.getById = function (req, res) {
