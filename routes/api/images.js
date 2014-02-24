@@ -1,11 +1,10 @@
-var log     = require('../../libs/log')(module);
-var Image   = require('../../models/models').Image;
+var log = require('../../libs/log')(module);
+var Image = require('../../models/models').Image;
 
 exports.get = function (req, res) {
-    Image.find({}, function (err, images) {
-        if (!err) {
-            return res.send(images);
-        } else {
+    return Image.find({}, function (err, images) {
+        if (!err) return res.send(images);
+        else {
             res.statusCode = 500;
             log.error('Internal error(%d): %s', res.statusCode, err.message);
             return res.send({ error: 'Server error' });
