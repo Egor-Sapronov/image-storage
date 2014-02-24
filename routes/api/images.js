@@ -1,8 +1,8 @@
 var log = require('../../libs/log')(module);
-var Image = require('../../models/Image');
+var Image = require('../../models/image');
 
 exports.get = function (req, res) {
-    Image.find({}, function (err, images) {
+    image.find({}, function (err, images) {
         if (!err) {
             return res.send(images);
         } else {
@@ -18,7 +18,7 @@ exports.post = function (req, res) {
 };
 
 exports.getId = function (req, res) {
-    return Image.findById(req.params.id, function (err, image) {
+    return image.findById(req.params.id, function (err, image) {
         if (!image) {
             res.statusCode = 500;
             return res.send({error: 'Not found'});
