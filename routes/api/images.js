@@ -17,7 +17,7 @@ exports.post = function (req, res) {
     res.send('Not implemented.');
 };
 
-exports.getId = function (req, res) {
+exports.getById = function (req, res) {
     return image.findById(req.params.id, function (err, image) {
         if (!image) {
             res.statusCode = 500;

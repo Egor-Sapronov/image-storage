@@ -32,7 +32,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/api/images', imagesApi.get);
-app.get('/api/images/:id', imagesApi.getId);
+app.get('/api/images/:id', imagesApi.getById);
 
 app.get('/', images.list);
 
