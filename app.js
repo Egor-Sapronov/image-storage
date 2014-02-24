@@ -1,14 +1,13 @@
 /**
  * Module dependencies.
  */
-
-var express = require('express');
-var http = require('http');
-//var routes=require('./routes');
-var images = require('./routes/images');
-var path = require('path');
-var log = require('./libs/log')(module);
-var imagesApi=require('./routes/api/images');
+var express     = require('express');
+var http        = require('http');
+var images      = require('./routes/images');
+var path        = require('path');
+var log         = require('./libs/log')(module);
+var imagesApi   = require('./routes/api/images');
+var bundlesApi  = require('./routes/api/bundles');
 
 var app = express();
 
@@ -34,11 +33,17 @@ if ('development' == app.get('env')) {
 app.get('/api/images', imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
 
+app.get('/api/bundles', bundlesApi.get);
+app.post('/api/bundles', bundlesApi.post);
+app.get('/api/bundles/:id', bundlesApi.getById);
+app.put('/api/bundles/:id', bundlesApi.put);
+app.delete('/api/bundles/:id', bundlesApi.delete);
+
 app.get('/', images.list);
 
 app.get('/upload', images.form);
 app.post('/upload', images.submit(app.get('images')));
 
 http.createServer(app).listen(app.get('port'), function () {
-    log.info('Express server listening on port'+' '+app.get('port'));
+    log.info('Express server listening on port' + ' ' + app.get('port'));
 });
