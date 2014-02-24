@@ -1,4 +1,4 @@
-var Image = require('../models/mongo');
+var Image = require('../models/Image');
 var path = require('path');
 var fs = require('fs');
 var join = path.join;

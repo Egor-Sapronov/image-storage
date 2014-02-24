@@ -1,5 +1,5 @@
 var log = require('../../libs/log')(module);
-var Image = require('../../models/mongo');
+var Image = require('../../models/Image');
 
 exports.get = function (req, res) {
     Image.find({}, function (err, images) {
