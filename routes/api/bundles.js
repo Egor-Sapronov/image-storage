@@ -1,4 +1,4 @@
-var Bundle  = require('../../models/bundle');
+var Bundle  = require('../../models/models').Bundle;
 var log     = require('../../libs/log')(module);
 
 exports.get = function (req, res) {
