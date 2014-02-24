@@ -1,5 +1,5 @@
-var Bundle = require('../../models/bundle');
-var log = require('../../libs/log')(module);
+var Bundle  = require('../../models/bundle');
+var log     = require('../../libs/log')(module);
 
 exports.get = function (req, res) {
     res.send('Not implemented.');
