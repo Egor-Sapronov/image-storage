@@ -1,7 +1,7 @@
-var Image = require('../models/models').Image;
-var path = require('path');
-var fs = require('fs');
-var join = path.join;
+var Image   = require('../models/models').Image;
+var path    = require('path');
+var fs      = require('fs');
+var join    = path.join;
 
 
 exports.list = function (req, res, next) {
