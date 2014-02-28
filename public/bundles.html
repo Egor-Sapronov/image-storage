@@ -8,15 +8,15 @@
     <script src="/javascripts/app/bundleVM.js"></script>
 </head>
 <body>
-<h1></h1>
 
-<p></p>
+<ul data-bind="foreach: images">
+    <li>
+        <div class="photo">
+            <h2></h2>
+            <img data-bind="attr:{src: '/images/'+path}">
+        </div>
+    </li>
+    </ul>
 
-<div id="photos">
-    <div class="photo">
-        <h2></h2>
-        <img src="/images/">
-    </div>
-</div>
 </body>
 </html>
