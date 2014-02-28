@@ -18,6 +18,7 @@ var viewModel = function () {
 
     self.addImageUrl = function (path) {
         self.selectedImages.push(path);
+        console.log(path.split('.').shift());
     };
 
     self.get();
