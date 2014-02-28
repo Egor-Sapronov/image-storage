@@ -12,7 +12,7 @@
     <li>
         <div class="photo">
             <h2></h2>
-            <img data-bind="attr:{src: '/images/'+path}, click: $root.addImageUrl">
+            <img class="photo" data-bind="attr:{src: '/images/'+path}, click: $root.addImageUrl.bind($data, path)">
         </div>
     </li>
 </ul>

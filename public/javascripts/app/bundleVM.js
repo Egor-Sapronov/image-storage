@@ -16,9 +16,8 @@ var viewModel = function () {
         });
     };
 
-    self.addImageUrl = function () {
-        var src = $("img",this).attr('src');
-        self.selectedImages.push(src);
+    self.addImageUrl = function (path) {
+        self.selectedImages.push(path);
     };
 
     self.get();
