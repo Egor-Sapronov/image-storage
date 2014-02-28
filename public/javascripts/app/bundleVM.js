@@ -2,6 +2,8 @@ var viewModel = function () {
     var self = this;
 
     self.images = ko.observableArray();
+    self.selectedImages = ko.observableArray();
+
 
     self.get = function () {
         $.ajax({
@@ -14,9 +16,14 @@ var viewModel = function () {
         });
     };
 
+    self.addImageUrl = function () {
+        var src = $("img",this).attr('src');
+        self.selectedImages.push(src);
+    };
+
     self.get();
 };
 
-$(document).ready(function(){
+$(document).ready(function () {
     ko.applyBindings(new viewModel());
 });

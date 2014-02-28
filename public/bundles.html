@@ -8,15 +8,22 @@
     <script src="/javascripts/app/bundleVM.js"></script>
 </head>
 <body>
-
 <ul data-bind="foreach: images">
     <li>
         <div class="photo">
             <h2></h2>
-            <img data-bind="attr:{src: '/images/'+path}">
+            <img data-bind="attr:{src: '/images/'+path}, click: $root.addImageUrl">
         </div>
     </li>
-    </ul>
+</ul>
 
+<ul data-bind="foreach: selectedImages">
+    <li>
+        <div class="photo">
+            <h2></h2>
+            <img data-bind="attr:{src: '/images/'+$data}">
+        </div>
+    </li>
+</ul>
 </body>
 </html>
