@@ -37,17 +37,6 @@ exports.post = function (req, res) {
     });
 };
 
-var getImages = function (bundle, callback) {
-    Image.find({
-        '_id': {$in: bundle.imagesId}
-    }, function (err, images) {
-        if (!err) {
-            callback(images);
-            return images;
-        }
-    });
-};
-
 exports.getById = function (req, res) {
     return Bundle.findById(req.params.id, function (err, bundle) {
         if (!bundle) {
@@ -55,8 +44,16 @@ exports.getById = function (req, res) {
             return res.send({error: 'Not found'});
         }
         if (!err) {
-            getImages(bundle, function (images) {
-                return res.send({status: 'OK', fullBundle: {name: bundle.name, images: images}});
+            Image.find({
+                '_id': {$in: bundle.imagesId}
+            }, function (err, images) {
+                if (!err) {
+                    return res.send({status: 'OK', fullBundle: {name: bundle.name, images: images}});
+                } else {
+                    res.statusCode = 500;
+                    log.error('Internal error(%d): %s', res.statusCode, err.message);
+                    return res.send({ error: 'Server error' });
+                }
             });
         } else {
             res.statusCode = 500;
