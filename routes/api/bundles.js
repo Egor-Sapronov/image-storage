@@ -1,4 +1,5 @@
 var Bundle = require('../../models/models').Bundle;
+var Image = require('../../models/models').Image;
 var log = require('../../libs/log')(module);
 
 exports.get = function (req, res) {
@@ -36,14 +37,34 @@ exports.post = function (req, res) {
     });
 };
 
+var getImages = function (bundle) {
+    var images = []
+    bundle.imagesId.forEach(function (value) {
+        Image.findById(value, function (err, image) {
+            if (!err) {
+                images.push(image);
+            }
+        });
+    });
+    return images;
+};
+
 exports.getById = function (req, res) {
+    var self = this;
+
     return Bundle.findById(req.params.id, function (err, bundle) {
         if (!bundle) {
             res.statusCode = 500;
             return res.send({error: 'Not found'});
         }
         if (!err) {
-            return res.send({status: 'OK', bundle: bundle});
+            self.images = [];
+            self.fullBundle = {
+                name: bundle.name,
+                images: getImages(bundle)
+            };
+
+            return res.send({status: 'OK', bundle: self.fullBundle});
         } else {
             res.statusCode = 500;
             log.error('Internal error(%d): %s', res.statusCode, err.message);
