@@ -15,7 +15,7 @@ exports.get = function (req, res) {
 exports.post = function (req, res) {
     var bundle = new Bundle({
         name: req.body.name,
-        imagesId: body.imagesId
+        imagesId: req.body.imagesId
     });
 
     bundle.save(function (err) {
