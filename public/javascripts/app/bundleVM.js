@@ -4,10 +4,11 @@ var viewModel = function () {
     self.images = ko.observableArray();
     self.bundleName = ko.observable();
     self.selectedImages = ko.observableArray();
+
     self.imagesIds = [];
 
 
-    self.get = function () {
+    self.getImages = function () {
         $.ajax({
             url: '/api/images',
             success: function (images) {
@@ -23,7 +24,6 @@ var viewModel = function () {
         self.imagesIds.push(path.split('.').shift());
     };
 
-
     self.postBundle = function () {
         var data = {
             name: self.bundleName,
@@ -38,7 +38,7 @@ var viewModel = function () {
         });
     };
 
-    self.get();
+    self.getImages();
 };
 
 $(document).ready(function () {
