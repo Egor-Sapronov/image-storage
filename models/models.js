@@ -23,7 +23,18 @@ var bundle = new mongoose.Schema({
     imagesId: []
 });
 
-//module.exports = mongoose.model('image', image);
+var user = new mongoose.Schema({
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+});
 
 exports.Image = mongoose.model('image', image);
 exports.Bundle = mongoose.model('bundle', bundle);
+exports.User = mongoose.model('user', user);
