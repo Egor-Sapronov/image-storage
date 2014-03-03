@@ -1,13 +1,15 @@
 /**
  * Module dependencies.
  */
-var express     = require('express');
-var http        = require('http');
-var images      = require('./routes/images');
-var path        = require('path');
-var log         = require('./libs/log')(module);
-var imagesApi   = require('./routes/api/images');
-var bundlesApi  = require('./routes/api/bundles');
+var express = require('express');
+var http = require('http');
+var images = require('./routes/images');
+var path = require('path');
+var log = require('./libs/log')(module);
+var imagesApi = require('./routes/api/images');
+var bundlesApi = require('./routes/api/bundles');
+var passport = require('passport');
+var auth = require('./libs/auth');
 
 var app = express();
 
@@ -22,7 +24,9 @@ app.use(express.json());
 app.use(express.bodyParser());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(passport.initialize());
 app.use(app.router);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
@@ -33,7 +37,7 @@ if ('development' == app.get('env')) {
 app.get('/api/images', imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
 
-app.get('/api/bundles', bundlesApi.get);
+app.get('/api/bundles', passport.authenticate('local', {successRedirect: '/api/bundles', failureRedirect: '/'}), bundlesApi.get);
 app.post('/api/bundles', bundlesApi.post);
 app.get('/api/bundles/:id', bundlesApi.getById);
 app.put('/api/bundles/:id', bundlesApi.put);
