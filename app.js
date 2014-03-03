@@ -10,11 +10,11 @@ var imagesApi = require('./routes/api/images');
 var bundlesApi = require('./routes/api/bundles');
 var passport = require('passport');
 var auth = require('./libs/auth');
+var config = require('./libs/config');
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('images', __dirname + '/public/images');
@@ -48,6 +48,6 @@ app.get('/', images.list);
 app.get('/upload', images.form);
 app.post('/upload', images.submit(app.get('images')));
 
-http.createServer(app).listen(app.get('port'), function () {
-    log.info('Express server listening on port' + ' ' + app.get('port'));
+http.createServer(app).listen(config.get('port'), function () {
+    log.info('Express server listening on port' + ' ' + config.get('port'));
 });
