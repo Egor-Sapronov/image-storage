@@ -44,6 +44,29 @@ var user = new mongoose.Schema({
     }
 });
 
+user.methods.encryptPassword = function (password) {
+    return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+};
+
+user.virtual('userId')
+    .get(function () {
+        return this.id;
+    });
+
+user.virtual('password')
+    .set(function (password) {
+        this._plainPassword = password;
+        this.salt = crypto.randomBytes(32).toString('base64');
+        this.hashedPassword = this.encryptPassword(password);
+    })
+    .get(function () {
+        return this._plainPassword;
+    });
+
+user.methods.checkPassword = function (password) {
+    return this.encryptPassword(password) === this.hashedPassword;
+};
+
 exports.Image = mongoose.model('image', image);
 exports.Bundle = mongoose.model('bundle', bundle);
 exports.User = mongoose.model('user', user);
