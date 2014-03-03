@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var log = require('../libs/log')(module);
+var crypto = require('crypto');
 
 mongoose.connect('mongodb://localhost/image_storage');
 
@@ -18,10 +19,14 @@ var image = new mongoose.Schema({
     path: String
 });
 
+exports.Image = mongoose.model('image', image);
+
 var bundle = new mongoose.Schema({
     name: String,
     imagesId: []
 });
+
+exports.Bundle = mongoose.model('bundle', bundle);
 
 var user = new mongoose.Schema({
     username: {
@@ -29,12 +34,104 @@ var user = new mongoose.Schema({
         unique: true,
         required: true
     },
-    password: {
+    hashedPassword: {
+        type: String,
+        required: true
+    },
+    salt: {
+        type: String,
+        required: true
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+user.methods.encryptPassword = function (password) {
+    return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+};
+
+user.virtual('userId')
+    .get(function () {
+        return this.id;
+    });
+
+user.virtual('password')
+    .set(function (password) {
+        this._plainPassword = password;
+        this.salt = crypto.randomBytes(32).toString('base64');
+        this.hashedPassword = this.encryptPassword(password);
+    })
+    .get(function () {
+        return this._plainPassword;
+    });
+
+user.methods.checkPassword = function (password) {
+    return this.encryptPassword(password) === this.hashedPassword;
+};
+
+exports.User = mongoose.model('user', user);
+
+var client = new mongoose.Scheme({
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    clientId: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    clientSecret: {
         type: String,
         required: true
     }
 });
 
-exports.Image = mongoose.model('image', image);
-exports.Bundle = mongoose.model('bundle', bundle);
-exports.User = mongoose.model('user', user);
+exports.Client = mongoose.model('client', client);
+
+var accessToken = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    clientId: {
+        type: String,
+        required: true
+    },
+    token: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+exports.AccessToke = mongoose.model('accessToken', accessToken);
+
+var refreshToken = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    clientId: {
+        type: String,
+        required: true
+    },
+    token: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+exports.RefreshToken = mongoose.model('refreshToken', refreshToken);

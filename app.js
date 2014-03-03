@@ -37,7 +37,7 @@ if ('development' == app.get('env')) {
 app.get('/api/images', imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
 
-app.get('/api/bundles', passport.authenticate('local', {successRedirect: '/api/bundles', failureRedirect: '/'}), bundlesApi.get);
+app.get('/api/bundles', bundlesApi.get);
 app.post('/api/bundles', bundlesApi.post);
 app.get('/api/bundles/:id', bundlesApi.getById);
 app.put('/api/bundles/:id', bundlesApi.put);
