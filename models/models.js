@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 var log = require('../libs/log')(module);
 var crypto = require('crypto');
+var config = require('../libs/config');
 
-mongoose.connect('mongodb://localhost/image_storage');
+mongoose.connect(config.get('mongoose:uri'));
 
 var db = mongoose.connection;
 
@@ -73,7 +74,7 @@ user.methods.checkPassword = function (password) {
 
 exports.User = mongoose.model('user', user);
 
-var client = new mongoose.Scheme({
+var client = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
