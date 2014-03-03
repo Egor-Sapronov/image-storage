@@ -113,7 +113,7 @@ var accessToken = new mongoose.Schema({
     }
 });
 
-exports.AccessToke = mongoose.model('accessToken', accessToken);
+exports.AccessToken = mongoose.model('accessToken', accessToken);
 
 var refreshToken = new mongoose.Schema({
     userId: {
