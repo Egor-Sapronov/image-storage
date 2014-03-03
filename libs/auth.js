@@ -7,7 +7,7 @@ passport.use(new LocalStrategy(function (username, password, done) {
             return done(err);
         }
         if (!user) {
-            return done(null, false, {message: 'Incorrecr username.'});
+            return done(null, false, {message: 'Incorrect username.'});
         }
         if (!user.validPassword(password)) {
             return done(null, false, {message: 'Incorrect password.'});
