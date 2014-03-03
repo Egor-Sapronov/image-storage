@@ -19,10 +19,14 @@ var image = new mongoose.Schema({
     path: String
 });
 
+exports.Image = mongoose.model('image', image);
+
 var bundle = new mongoose.Schema({
     name: String,
     imagesId: []
 });
+
+exports.Bundle = mongoose.model('bundle', bundle);
 
 var user = new mongoose.Schema({
     username: {
@@ -67,6 +71,23 @@ user.methods.checkPassword = function (password) {
     return this.encryptPassword(password) === this.hashedPassword;
 };
 
-exports.Image = mongoose.model('image', image);
-exports.Bundle = mongoose.model('bundle', bundle);
 exports.User = mongoose.model('user', user);
+
+var client = new mongoose.Scheme({
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    clientId: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    clientSecret: {
+        type: String,
+        required: true
+    }
+});
+
+exports.Client = mongoose.model('client', client);
