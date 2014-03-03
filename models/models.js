@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var log = require('../libs/log')(module);
+var crypto = require('crypto');
 
 mongoose.connect('mongodb://localhost/image_storage');
 
@@ -29,9 +30,17 @@ var user = new mongoose.Schema({
         unique: true,
         required: true
     },
-    password: {
+    hashedPassword: {
         type: String,
         required: true
+    },
+    salt: {
+        type: String,
+        required: true
+    },
+    created: {
+        type: Date,
+        default: Date.now
     }
 });
 
