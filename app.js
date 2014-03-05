@@ -44,7 +44,7 @@ app.get('/api/userInfo',
         res.json({user_id: req.user.userId, name: req.user.username, scope: req.authInfo.scope})
     });
 
-app.get('/api/images', imagesApi.get);
+app.get('/api/images',passport.authenticate('bearer',{session:false}), imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
 
 app.get('/api/bundles', bundlesApi.get);
