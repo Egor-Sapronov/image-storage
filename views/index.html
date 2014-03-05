@@ -4,8 +4,9 @@
     <title>Index</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="/javascripts/jquery-1.11.0.min.js"></script>
-    <script src="/javascripts/backbone.js"></script>
     <script src="/javascripts/underscore.js"></script>
+    <script src="/javascripts/backbone.js"></script>
+
     <script src="/javascripts/app/router.js"></script>
 </head>
 <body>
@@ -17,5 +18,25 @@
         <li><a href="#!/login">LogIn</a></li>
     </ul>
 </div>
+
+<div id="block" class="block">
+</div>
+
+<script type="text/template" id="Upload">
+    <div class="upload">
+        <p><input type="text" placeholder="Name"/></p>
+
+        <p><input type="file"/></p>
+
+        <p><input type="submit"/></p>
+    </div>
+</script>
+
+<script type="text/template" id="images">
+    <div class="images">
+        <h2></h2>
+        <img src="/images/">
+    </div>
+</script>
 </body>
 </html>
