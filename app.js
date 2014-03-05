@@ -9,7 +9,7 @@ var log = require('./libs/log')(module);
 var imagesApi = require('./routes/api/images');
 var bundlesApi = require('./routes/api/bundles');
 var passport = require('passport');
-var auth = require('./libs/auth');
+var oauth2 = require('./libs/oauth2');
 var config = require('./libs/config');
 
 var app = express();
@@ -34,6 +34,16 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+require('./libs/oauth');
+
+app.post('/oauth/token', oauth2.token);
+
+app.get('/api/userInfo',
+    passport.authenticate('bearer', {session: false}),
+    function (req, res) {
+        res.json({user_id: req.user.userId, name: req.user.username, scope: req.authInfo.scope})
+    });
+
 app.get('/api/images', imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
 
@@ -51,3 +61,4 @@ app.post('/upload', images.submit(app.get('images')));
 http.createServer(app).listen(config.get('port'), function () {
     log.info('Express server listening on port' + ' ' + config.get('port'));
 });
+

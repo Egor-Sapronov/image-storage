@@ -1,4 +1,4 @@
-var oauth2rize = require('oauth2rize');
+var oauth2rize = require('oauth2orize');
 var config = require('./config');
 var passport = require('passport');
 var crypto = require('crypto');
