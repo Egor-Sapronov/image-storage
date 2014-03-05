@@ -17,6 +17,7 @@ var app = express();
 // all environments
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
 app.set('images', __dirname + '/public/images');
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -48,7 +49,11 @@ app.get('/api/bundles/:id', bundlesApi.getById);
 app.put('/api/bundles/:id', bundlesApi.put);
 app.delete('/api/bundles/:id', bundlesApi.delete);
 
-app.get('/', images.list);
+//app.get('/', images.list);
+
+app.get('/',function(req,res){
+    res.render('index.html');
+});
 
 app.get('/upload', images.form);
 app.post('/upload', images.submit(app.get('images')));
