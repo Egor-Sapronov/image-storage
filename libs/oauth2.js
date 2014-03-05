@@ -53,8 +53,8 @@ server.exchange(oauth2rize.exchange.password(function (client, username, passwor
 }));
 
 // Exchange refreshToken for access token.
-server.exchange(oauth2rize.exchange.refreshToken(function(client,refreshToken,scope,done){
-    RefreshTokenModel.findOne({token:refreshToken},function(err,token){
+server.exchange(oauth2rize.exchange.refreshToken(function (client, refreshToken, scope, done) {
+    RefreshTokenModel.findOne({token: refreshToken}, function (err, token) {
         if (err) {
             return done(err);
         }
@@ -62,9 +62,13 @@ server.exchange(oauth2rize.exchange.refreshToken(function(client,refreshToken,sc
             return done(null, false);
         }
 
-        UserModel.findById(token.userId,function(err,user){
-            if(err){return done(err);}
-            if(!user){return done(null,false);}
+        UserModel.findById(token.userId, function (err, user) {
+            if (err) {
+                return done(err);
+            }
+            if (!user) {
+                return done(null, false);
+            }
 
             RefreshTokenModel.remove({userId: user.userId, clientId: client.clientId}, function (err) {
                 if (err) {
@@ -96,6 +100,13 @@ server.exchange(oauth2rize.exchange.refreshToken(function(client,refreshToken,sc
         });
     });
 }));
+
+// token endpoint
+exports.token = [
+    passport.authenticate(['basic', 'oauth2-client-password'], {session: false}),
+    server.token(),
+    server.errorHandler()
+]
 
 
 
