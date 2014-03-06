@@ -2,29 +2,19 @@ var Controller = Backbone.Router.extend({
     routes: {
         '': 'upload',
         '!/': 'upload',
-        '!/images': 'images',
-        '!/bundles': 'bundles',
-        '!/login':'login'
+        '!/images': 'images'
     },
 
     upload: function () {
-        $('.block').hide();
-        $('#upload').show();
+        if (Views.upload != null) {
+            Views.upload.render();
+        }
     },
 
     images: function () {
-        $('.block').hide();
-        $('#images').show();
-    },
-
-    bundles: function () {
-        $('.block').hide();
-        $('bundles').show();
-    },
-
-    login: function () {
-        $('.block').hide();
-        $('login').show();
+        if (Views.images != null) {
+            Views.images.render();
+        }
     }
 });
 
