@@ -42,6 +42,7 @@ app.post('/oauth/token', oauth2.token);
 
 app.get('/api/images', imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
+app.post('/api/images',imagesApi.post);
 
 app.get('/api/bundles', bundlesApi.get);
 app.post('/api/bundles', bundlesApi.post);
@@ -52,8 +53,9 @@ app.delete('/api/bundles/:id', bundlesApi.delete);
 //app.get('/', images.list);
 
 app.get('/',function(req,res){
-    res.render('index.html');
+    res.sendfile('index.html');
 });
+
 
 app.get('/upload', images.form);
 app.post('/upload', images.submit(app.get('images')));

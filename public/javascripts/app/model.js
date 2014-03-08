@@ -1,9 +1,9 @@
-var Image = Backbone.Model.extend({
+var ImageModel = Backbone.Model.extend({
     urlRoot: '/api/images'
 });
 
-var Images = Backbone.Collection.extend({
-    model: Image,
+var ImagesCollection = Backbone.Collection.extend({
+    model: ImageModel,
     url: '/api/images'
 });
 

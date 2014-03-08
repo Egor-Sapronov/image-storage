@@ -88,8 +88,16 @@
 <script type="text/template" id="images">
     <div>
         <div class="row">
-            <div class="col-xs-12 col-md-8">Images</div>
-            <div class="col-xs-6 col-md-4">Upload</div>
+            <div class="col-xs-12 col-md-8">
+                    <ul><% _.each(images, function(image) { %><li><%=image.name%></li>
+                        <%});%>
+                    </ul >
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <input type="text" placeholder="Name"/>
+                <input type="file"/>
+                <input type="submit" value="Submit"/>
+            </div>
         </div>
     </div>
 </script>
@@ -110,6 +118,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+<script src="/javascripts/app/model.js"></script>
 <script src="/javascripts/app/view.js"></script>
 <script src="/javascripts/app/controller.js"></script>
 </body>
