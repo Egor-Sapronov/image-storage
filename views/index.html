@@ -34,7 +34,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">Images</a>
+            <a class="navbar-brand" href="#!/bundles">Bundles</a>
         </div>
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
@@ -52,10 +53,8 @@
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
-    <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+    <div class="container" id="main">
+
     </div>
 </div>
 
@@ -86,6 +85,23 @@
     </footer>
 </div> <!-- /container -->
 
+<script type="text/template" id="images">
+    <div>
+        <div class="row">
+            <div class="col-xs-12 col-md-8">Images</div>
+            <div class="col-xs-6 col-md-4">Upload</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="bundles">
+    <div class="row">
+        <div class="col-xs-6 col-md-4">Bundles</div>
+        <div class="col-xs-6 col-md-4">Images</div>
+        <div class="col-xs-6 col-md-4">New bundle</div>
+    </div>
+</script>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -94,6 +110,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
-<script src="/javascripts/app/model.js"></script>
+<script src="/javascripts/app/view.js"></script>
+<script src="/javascripts/app/controller.js"></script>
 </body>
 </html>
