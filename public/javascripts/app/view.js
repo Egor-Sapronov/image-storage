@@ -12,7 +12,8 @@ var Images = Backbone.View.extend({
     },
 
     events:{
-        'click input:submit':'save'
+        'click input:submit':'save',
+        'change images':'render'
     },
 
     image:new ImageModel(),
