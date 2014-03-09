@@ -8,7 +8,6 @@ var Images = Backbone.View.extend({
     render: function () {
         this.images.fetch();
         $(this.el).html(this.template({images: this.images.toJSON()}));
-
     },
 
     events: {
@@ -48,8 +47,15 @@ var LogIn = Backbone.View.extend({
     },
 
     login: function () {
-        this.user.set({username:$('#name').val(), password: $('#password').val()});
-        this.user.save();
+        this.user.set({username: $('#name').val(), password: $('#password').val()});
+        this.user.save().success(function (model, res) {
+//            var token = new TokenModel();
+            auth.refreshToken = model.refresh_token;
+            auth.accessToken = model.access_token;
+            $.ajaxSetup({
+                headers: { 'Authorization': 'Bearer ' + auth.accessToken }
+            });
+        });
     },
 
     render: function () {
