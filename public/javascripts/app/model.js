@@ -13,8 +13,26 @@ var Bundle = Backbone.Model.extend({
 
 var Bundles = Backbone.Collection.extend({
     model: Bundle,
-    url: 'api.bundles'
+    url: 'api/bundles'
 });
+
+var UserModel = Backbone.Model.extend({
+    defaults: {
+        'grant_type': 'password',
+        'client_id': 'website',
+        'client_secret': 'secret'
+    },
+    url: 'oauth/token'
+});
+
+var TokenModel = Backbone.Model.extend({
+    defaults: {
+        'grant_type': 'refresh_token',
+        'client_id': 'website',
+        'client_secret': 'secret'
+    },
+    url: 'oauth/token'
+})
 
 
 
