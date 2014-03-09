@@ -38,7 +38,7 @@ if ('development' == app.get('env')) {
 require('./libs/oauth');
 
 app.post('/oauth/token', oauth2.token);
-
+app.post('/oauth/register',oauth2.register);
 
 app.get('/api/images',passport.authenticate('bearer', { session: false }), imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);

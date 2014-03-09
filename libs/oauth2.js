@@ -1,3 +1,5 @@
+var log = require('../libs/log')(module);
+var mongoose = require('mongoose');
 var oauth2rize = require('oauth2orize');
 var config = require('./config');
 var passport = require('passport');
@@ -107,6 +109,18 @@ exports.token = [
     server.token(),
     server.errorHandler()
 ]
+
+exports.register = function (req, res) {
+    var user = new UserModel({username: req.body.username, password: req.body.password});
+    user.save(function (err, user) {
+        if (err) return log.error(err);
+        else {
+
+            log.info("New user - %s:%s", user.username, user.password);
+            res.send({status: 'OK'});
+        }
+    });
+};
 
 
 
