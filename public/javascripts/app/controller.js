@@ -7,11 +7,13 @@ var Controller = Backbone.Router.extend({
     images: function () {
         if (Views.images != null) {
             Views.images.render();
+            Views.login.render();
         }
     },
     bundles: function () {
         if (Views.bundles != null) {
             Views.bundles.render();
+            Views.login.render();
         }
     }
 });

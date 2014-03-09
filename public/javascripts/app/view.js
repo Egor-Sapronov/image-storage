@@ -7,21 +7,21 @@ var Images = Backbone.View.extend({
 
     render: function () {
         this.images.fetch();
-        $(this.el).html(this.template({images:this.images.toJSON()}));
+        $(this.el).html(this.template({images: this.images.toJSON()}));
 
     },
 
-    events:{
-        'click input:submit':'save',
-        'change images':'render'
+    events: {
+        'click input:submit': 'save',
+        'change images': 'render'
     },
 
-    image:new ImageModel(),
+    image: new ImageModel(),
 
-    images:new ImagesCollection(),
+    images: new ImagesCollection(),
 
-    save:function(){
-        this.image.set({name:'newImage'});
+    save: function () {
+        this.image.set({name: 'newImage'});
         this.image.save();
     }
 });
@@ -36,7 +36,29 @@ var Bundles = Backbone.View.extend({
     }
 });
 
+var LogIn = Backbone.View.extend({
+    el: $('#auth'),
+
+    template: _.template($('#login').html()),
+
+    user: new UserModel(),
+
+    events: {
+        'click button:submit': 'login'
+    },
+
+    login: function () {
+        this.user.set({username:$('#name').val(), password: $('#password').val()});
+        this.user.save();
+    },
+
+    render: function () {
+        $(this.el).html(this.template());
+    }
+});
+
 Views = {
     images: new Images(),
-    bundles: new Bundles()
+    bundles: new Bundles(),
+    login: new LogIn()
 };
