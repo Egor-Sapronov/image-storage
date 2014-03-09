@@ -40,7 +40,7 @@ require('./libs/oauth');
 app.post('/oauth/token', oauth2.token);
 
 
-app.get('/api/images', imagesApi.get);
+app.get('/api/images',passport.authenticate('bearer', { session: false }), imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
 app.post('/api/images',imagesApi.post);
 
