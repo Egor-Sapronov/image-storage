@@ -28,8 +28,8 @@ var UserModel = Backbone.Model.extend({
 var TokenModel = Backbone.Model.extend({
     defaults: {
         'grant_type': 'refresh_token',
-        'client_id': 'website',
-        'client_secret': 'secret'
+        'client_id': 'mobileV1',
+        'client_secret': 'abc123456'
     },
     url: 'oauth/token'
 })
