@@ -1,7 +1,8 @@
 var Controller = Backbone.Router.extend({
     routes: {
-        '': 'images',
-        '!/': 'images',
+        '': 'upload',
+        '!/':'upload',
+        '!/images': 'images',
         '!/bundles':'bundles'
     },
     images: function () {
@@ -13,6 +14,12 @@ var Controller = Backbone.Router.extend({
     bundles: function () {
         if (Views.bundles != null) {
             Views.bundles.render();
+            Views.login.render();
+        }
+    },
+    upload:function(){
+        if(Views.upload!=null){
+            Views.upload.render();
             Views.login.render();
         }
     }
