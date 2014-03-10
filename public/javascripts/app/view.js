@@ -26,11 +26,22 @@ var Images = Backbone.View.extend({
 });
 
 var Upload = Backbone.View.extend({
-    el:$('#main'),
+    el: $('#main'),
 
     template: _.template($('#upload').html()),
 
-    render:function(){
+//    events: {
+//        'click button:submit': 'uploadImage'
+//    },
+
+    image: new ImageModel(),
+
+    uploadImage: function () {
+        this.image.set({name:$('#filename').val(),file:$('#file').val()});
+        this.image.save();
+    },
+
+    render: function () {
         $(this.el).html(this.template());
     }
 });
@@ -77,5 +88,5 @@ Views = {
     images: new Images(),
     bundles: new Bundles(),
     login: new LogIn(),
-    upload:new Upload()
+    upload: new Upload()
 };

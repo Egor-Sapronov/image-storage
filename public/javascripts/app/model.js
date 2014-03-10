@@ -1,14 +1,3 @@
-//var backboneSync = Backbone.sync;
-//
-//Backbone.sync = function (method, model, options){
-//    options.headers={
-//    'Authorization':'bearer'+auth.accessToken
-//    };
-//
-//    backboneSync(method,model,options);
-//
-//};
-
 var ImageModel = Backbone.Model.extend({
     urlRoot: '/api/images'
 });

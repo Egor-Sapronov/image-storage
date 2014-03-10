@@ -12,7 +12,7 @@ exports.get = function (req, res) {
     });
 }
 
-exports.post = function (req, res) {
+exports.post = function () {
     res.send('Not implemented.');
 };
 
