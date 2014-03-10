@@ -38,11 +38,10 @@ if ('development' == app.get('env')) {
 require('./libs/oauth');
 
 app.post('/oauth/token', oauth2.token);
-app.post('/oauth/register',oauth2.register);
+app.post('/oauth/register', oauth2.register);
 
-app.get('/api/images',passport.authenticate('bearer', { session: false }), imagesApi.get);
+app.get('/api/images', passport.authenticate('bearer', { session: false }), imagesApi.get);
 app.get('/api/images/:id', imagesApi.getById);
-app.post('/api/images',imagesApi.post);
 
 app.get('/api/bundles', bundlesApi.get);
 app.post('/api/bundles', bundlesApi.post);
@@ -52,7 +51,7 @@ app.delete('/api/bundles/:id', bundlesApi.delete);
 
 //app.get('/', images.list);
 
-app.get('/',function(req,res){
+app.get('/', function (req, res) {
     res.sendfile('index.html');
 });
 
