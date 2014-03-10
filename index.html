@@ -67,18 +67,10 @@
 </script>
 
 <script type="text/template" id="upload">
-    <!--<input type="text" class="form-control input-group" placeholder="Filename">-->
-    <!--<p>-->
-    <!--<div class="input-group">-->
-    <!--<input type="file" class="form-control">-->
-    <!--<span class="input-group-btn">-->
-    <!--<button class="btn btn-default" type="button">Go!</button>-->
-    <!--</span>-->
-    <!--</div>&lt;!&ndash;-->
-    <form class="form-upload" role="form">
+    <form method="post" action="/upload" enctype="multipart/form-data" class="form-upload" role="form">
         <h2 class="form-upload-heading">Upload a file</h2>
-        <input type="text" class="form-control" placeholder="Filename" required autofocus>
-        <input type="file" class="form-control" required>
+        <input id="filename" type="text" name="image[name]" class="form-control" placeholder="Filename" required autofocus>
+        <input id="file" type="file" name="image[file]" class="form-control" required>
         <p>
         <p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
