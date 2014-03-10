@@ -34,7 +34,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Images</a>
+            <a class="navbar-brand" href="#!/">Upload</a>
+            <a class="navbar-brand" href="#!/images">Images</a>
             <a class="navbar-brand" href="#!/bundles">Bundles</a>
         </div>
         <div class="navbar-collapse collapse" id="auth">
@@ -44,68 +45,44 @@
 </div>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container" id="main">
 
-    </div>
+<div class="container" id="main">
+
 </div>
 
-<div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Heading</h2>
 
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
+<div id="footer">
+    <div class="container">
+        <p class="text-muted">footer</p>
     </div>
-
-    <hr>
-
-    <footer>
-        <p>&copy; Company 2014</p>
-    </footer>
 </div>
-<!-- /container -->
 
 <script type="text/template" id="images">
     <div>
-        <div class="row">
-            <div class="col-xs-12 col-md-8">
-                <ul><% _.each(images, function(image) { %>
-                    <li><%=image.name%></li>
-                    <%});%>
-                </ul>
-            </div>
-            <div class="col-xs-6 col-md-4">
-                <input type="text" placeholder="Name"/>
-                <input type="file"/>
-                <input type="submit" value="Submit"/>
-            </div>
-        </div>
+        <ul><% _.each(images, function(image) { %>
+            <li><%=image.name%></li>
+            <%});%>
+        </ul>
     </div>
+</script>
+
+<script type="text/template" id="upload">
+    <!--<input type="text" class="form-control input-group" placeholder="Filename">-->
+    <!--<p>-->
+    <!--<div class="input-group">-->
+    <!--<input type="file" class="form-control">-->
+    <!--<span class="input-group-btn">-->
+    <!--<button class="btn btn-default" type="button">Go!</button>-->
+    <!--</span>-->
+    <!--</div>&lt;!&ndash;-->
+    <form class="form-upload" role="form">
+        <h2 class="form-upload-heading">Upload a file</h2>
+        <input type="text" class="form-control" placeholder="Filename" required autofocus>
+        <input type="file" class="form-control" required>
+        <p>
+        <p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+    </form>
 </script>
 
 <script type="text/template" id="bundles">
