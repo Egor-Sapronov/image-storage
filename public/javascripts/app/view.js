@@ -25,6 +25,16 @@ var Images = Backbone.View.extend({
     }
 });
 
+var Upload = Backbone.View.extend({
+    el:$('#main'),
+
+    template: _.template($('#upload').html()),
+
+    render:function(){
+        $(this.el).html(this.template());
+    }
+});
+
 var Bundles = Backbone.View.extend({
     el: $('#main'),
 
@@ -66,5 +76,6 @@ var LogIn = Backbone.View.extend({
 Views = {
     images: new Images(),
     bundles: new Bundles(),
-    login: new LogIn()
+    login: new LogIn(),
+    upload:new Upload()
 };
