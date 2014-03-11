@@ -19,6 +19,7 @@ var Images = Backbone.View.extend({
 
     images: new ImagesCollection(),
 
+
     save: function () {
         this.image.set({name: 'newImage'});
         this.image.save();
@@ -31,15 +32,15 @@ var Upload = Backbone.View.extend({
     template: _.template($('#upload').html()),
 
 //    events: {
-//        'click button:submit': 'uploadImage'
+//        'click form:submit': 'upload'
+//    },
+//
+//    upload: function () {
+//        $('#uploadForm').ajaxSubmit();
+//        return false;
 //    },
 
     image: new ImageModel(),
-
-    uploadImage: function () {
-        this.image.set({name:$('#filename').val(),file:$('#file').val()});
-        this.image.save();
-    },
 
     render: function () {
         $(this.el).html(this.template());

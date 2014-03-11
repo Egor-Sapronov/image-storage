@@ -1,5 +1,8 @@
 var log = require('../../libs/log')(module);
 var Image = require('../../models/models').Image;
+var path    = require('path');
+var fs      = require('fs');
+var join    = path.join;
 
 exports.get = function (req, res) {
     return Image.find({}, function (err, images) {
@@ -12,8 +15,29 @@ exports.get = function (req, res) {
     });
 }
 
-exports.post = function () {
-    res.send('Not implemented.');
+exports.post = function (dir) {
+    return function (req, res, next) {
+        log.info(JSON.stringify(req.files))
+        var img = req.files.image.file;
+        var name = req.body.image.name || img.name;
+        var ext = img.name.split('.').pop();
+
+        var image = new Image();
+        image.save(function (err, image) {
+            var fileName = image.id + '.' + ext;
+            var path = join(dir, fileName);
+
+            image.name = name;
+            image.path = fileName;
+            image.save(function (err) {
+                if (err) return next(err);
+                fs.rename(img.path, path, function (err) {
+                    if (err) return next(err);
+                    return res.send({status: 'OK', image: image});
+                });
+            });
+        });
+    };
 };
 
 exports.getById = function (req, res) {
