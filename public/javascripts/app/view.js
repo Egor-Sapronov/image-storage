@@ -31,15 +31,6 @@ var Upload = Backbone.View.extend({
 
     template: _.template($('#upload').html()),
 
-//    events: {
-//        'click form:submit': 'upload'
-//    },
-//
-//    upload: function () {
-//        $('#uploadForm').ajaxSubmit();
-//        return false;
-//    },
-
     image: new ImageModel(),
 
     render: function () {

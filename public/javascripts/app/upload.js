@@ -9,20 +9,22 @@ $(document).ready(function () {
         }
     }, 500);
 
-    $('#uploadForm').submit(function () {
-        $(this).ajaxSubmit({
-            header: { 'Authorization': 'Bearer ' + auth.accessToken },
-            error: function (xhr) {
+//    $('#uploadForm').submit(function () {
+//        $(this).ajaxSubmit({
+//            header: { 'Authorization': 'Bearer ' + auth.accessToken },
+//            error: function (xhr) {
+//
+//            },
+//
+//            success: function (response) {
+//                //TODO: We will fill this in later
+//            }
+//        });
+//
+//        // Have to stop the form from submitting and causing
+//        // a page refresh - don't forget this
+//        return false;
+//    });
 
-            },
-
-            success: function (response) {
-                //TODO: We will fill this in later
-            }
-        });
-
-        // Have to stop the form from submitting and causing
-        // a page refresh - don't forget this
-        return false;
-    });
+    $('#uploadForm').ajaxForm();
 });
