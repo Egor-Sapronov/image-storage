@@ -68,6 +68,7 @@ var LogIn = Backbone.View.extend({
             $.ajaxSetup({
                 headers: { 'Authorization': 'Bearer ' + auth.accessToken }
             });
+            console.log(auth.accessToken);
         });
     },
 
