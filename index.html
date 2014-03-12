@@ -69,11 +69,14 @@
 <script type="text/template" id="upload">
     <form id="uploadForm" action="/api/images" enctype="multipart/form-data" method="post" class="form-upload">
         <h2 class="form-upload-heading">Upload a file</h2>
-        <input id="filename" name="image[name]" type="text" class="form-control" placeholder="Filename" required autofocus>
+        <input id="filename" name="image[name]" type="text" class="form-control" placeholder="Filename" required
+               autofocus>
         <input id="userPhotoInput" type="file" name="image[file]" class="form-control" required>
+
         <p>
+
         <p>
-        <input type="submit" value="Upload" class="btn btn-lg btn-primary btn-block"></input>
+            <input type="submit" value="Upload" class="btn btn-lg btn-primary btn-block"></input>
     </form>
 </script>
 
@@ -106,9 +109,7 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
-
 <script src="/javascripts/app/auth.js"></script>
-<script src="/javascripts/app/upload.js"></script>
 <script src="/javascripts/app/model.js"></script>
 <script src="/javascripts/app/view.js"></script>
 <script src="/javascripts/app/controller.js"></script>

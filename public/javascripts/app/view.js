@@ -5,24 +5,18 @@ var Images = Backbone.View.extend({
 
     template: _.template($('#images').html()),
 
+    initialize: function () {
+        this.images = new ImagesCollection();
+        this.images.fetch();
+    },
+
     render: function () {
         this.images.fetch();
         $(this.el).html(this.template({images: this.images.toJSON()}));
     },
 
     events: {
-        'click input:submit': 'save',
         'change images': 'render'
-    },
-
-    image: new ImageModel(),
-
-    images: new ImagesCollection(),
-
-
-    save: function () {
-        this.image.set({name: 'newImage'});
-        this.image.save();
     }
 });
 
@@ -31,7 +25,10 @@ var Upload = Backbone.View.extend({
 
     template: _.template($('#upload').html()),
 
-    image: new ImageModel(),
+    initialize: function () {
+        this.image = new ImageModel();
+        $('#uploadForm').ajaxForm({data: {'Authorization': 'Bearer ' + auth.accessToken}});
+    },
 
     render: function () {
         $(this.el).html(this.template());
