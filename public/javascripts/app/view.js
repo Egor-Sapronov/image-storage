@@ -7,11 +7,19 @@ var Images = Backbone.View.extend({
 
     initialize: function () {
         this.images = new ImagesCollection();
-        this.images.fetch();
+        var self = this;
+        self.images.fetch().error(function (err) {
+            auth.updateToken();
+            self.images.fetch();
+        });
     },
 
     render: function () {
-        this.images.fetch();
+        var self = this;
+        self.images.fetch().error(function (err) {
+            auth.updateToken();
+            self.images.fetch();
+        });
         $(this.el).html(this.template({images: this.images.toJSON()}));
     },
 
@@ -59,13 +67,8 @@ var LogIn = Backbone.View.extend({
     login: function () {
         this.user.set({username: $('#name').val(), password: $('#password').val()});
         this.user.save().success(function (model, res) {
-//            var token = new TokenModel();
-            auth.refreshToken = model.refresh_token;
-            auth.accessToken = model.access_token;
-            $.ajaxSetup({
-                headers: { 'Authorization': 'Bearer ' + auth.accessToken }
-            });
-            console.log(auth.accessToken);
+            auth.setRefreshToken(model.refresh_token);
+            auth.setAccessToken(model.access_token);
         });
     },
 
