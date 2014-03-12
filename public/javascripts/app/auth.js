@@ -1,14 +1,31 @@
 var auth = {
-    saveAccessToken:function(token){
-        this.accessToken=token;
+    setRefreshToken: function (token) {
+        localStorage.setItem('refreshToken', token);
     },
 
-    saveRefreshToken:function(token){
-        this.refreshToken=token;
+    setAccessToken: function (token) {
+        localStorage.setItem('accessToken', token);
+        $.ajaxSetup({
+            headers: { 'Authorization': 'Bearer ' + this.getAccessToken() }
+        });
     },
 
-    updateToken:function(token){
+    getAccessToken: function () {
+        return localStorage.getItem('accessToken');
+    },
 
+    getRefreshToken: function () {
+        return localStorage.getItem('refreshToken');
+    },
+
+    updateToken: function () {
+        var tokenModel = new TokenModel();
+        tokenModel.set({refresh_token: this.getRefreshToken()});
+        tokenModel.save().success(function(model,res){
+            this.setRefreshToken(model.refresh_token);
+            this.setAccessToken(model.access_token);
+        });
     }
+
 };
 
