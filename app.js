@@ -40,25 +40,13 @@ require('./libs/oauth');
 app.post('/oauth/token', oauth2.token);
 app.post('/oauth/register', oauth2.register);
 
-app.get('/api/images', passport.authenticate('bearer', { session: false }), imagesApi.get);
-app.get('/api/images/:id', imagesApi.getById);
-app.post('/api/images',passport.authenticate('bearer', { session: false }),imagesApi.post(app.get('images')));
+imagesApi.setEndPoints(app);
 
-app.get('/api/bundles', bundlesApi.get);
-app.post('/api/bundles', bundlesApi.post);
-app.get('/api/bundles/:id', bundlesApi.getById);
-app.put('/api/bundles/:id', bundlesApi.put);
-app.delete('/api/bundles/:id', bundlesApi.delete);
-
-//app.get('/', images.list);
+bundlesApi.setEndPoints(app);
 
 app.get('/', function (req, res) {
     res.sendfile('index.html');
 });
-
-
-app.get('/upload', images.form);
-app.post('/upload', images.submit(app.get('images')));
 
 http.createServer(app).listen(config.get('port'), function () {
     log.info('Express server listening on port' + ' ' + config.get('port'));

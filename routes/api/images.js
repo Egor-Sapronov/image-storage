@@ -1,10 +1,11 @@
 var log = require('../../libs/log')(module);
 var Image = require('../../models/models').Image;
-var path    = require('path');
-var fs      = require('fs');
-var join    = path.join;
+var path = require('path');
+var fs = require('fs');
+var join = path.join;
+var passport = require('passport');
 
-exports.get = function (req, res) {
+get = function (req, res) {
     return Image.find({}, function (err, images) {
         if (!err) return res.send(images);
         else {
@@ -15,7 +16,7 @@ exports.get = function (req, res) {
     });
 }
 
-exports.post = function (dir) {
+post = function (dir) {
     return function (req, res, next) {
         log.info(JSON.stringify(req.files))
         var img = req.files.image.file;
@@ -40,7 +41,7 @@ exports.post = function (dir) {
     };
 };
 
-exports.getById = function (req, res) {
+getById = function (req, res) {
     return Image.findById(req.params.id, function (err, image) {
         if (!image) {
             res.statusCode = 500;
@@ -56,10 +57,18 @@ exports.getById = function (req, res) {
     });
 }
 
-exports.put = function (req, res) {
+put = function (req, res) {
     res.send('Not implemented.');
 };
 
-exports.delete = function (req, res) {
+remove = function (req, res) {
     res.send('Not implemented.');
+};
+
+exports.setEndPoints = function (app) {
+    app.get('/api/images', passport.authenticate('bearer', { session: false }), get);
+    app.get('/api/images/:id', passport.authenticate('bearer', { session: false }), getById);
+    app.post('/api/images', passport.authenticate('bearer', { session: false }), post(app.get('images')));
+    app.put('/api/images/:id', passport.authenticate('bearer', { session: false }), put);
+    app.delete('/api/images/:id', passport.authenticate('bearer', { session: false }), remove);
 };
