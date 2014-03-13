@@ -2,8 +2,11 @@ var Bundle = require('../../models/models').Bundle;
 var Image = require('../../models/models').Image;
 var log = require('../../libs/log')(module);
 var passport = require('passport');
+var path = require('path');
+var fs = require('fs');
+var join = path.join;
 
-get = function (req, res) {
+exports.get = function (req, res) {
     return Bundle.find({}, function (err, bundles) {
         if (!err) return res.send(bundles);
         else {
@@ -14,7 +17,7 @@ get = function (req, res) {
     });
 };
 
-post = function (req, res) {
+exports.post = function (req, res) {
     var bundle = new Bundle({
         name: req.body.name,
         imagesId: req.body.imagesId
@@ -28,17 +31,17 @@ post = function (req, res) {
             console.log(err);
             if (err.name == 'ValidationError') {
                 res.statusCode = 400;
-                res.send({ error: 'Validation error' });
+                return res.send({ error: 'Validation error' });
             } else {
                 res.statusCode = 500;
-                res.send({ error: 'Server error' });
+                return res.send({ error: 'Server error' });
             }
             log.error('Internal error(%d): %s', res.statusCode, err.message);
         }
     });
 };
 
-getById = function (req, res) {
+exports.getById = function (req, res) {
     return Bundle.findById(req.params.id, function (err, bundle) {
         if (!bundle) {
             res.statusCode = 500;
@@ -64,18 +67,18 @@ getById = function (req, res) {
     });
 };
 
-put = function (req, res) {
+exports.put = function (req, res) {
     res.send('Not implemented.');
 };
 
-remove = function (req, res) {
+exports.remove = function (req, res) {
     res.send('Not implemented.');
 };
 
 exports.setEndPoints = function (app) {
-    app.get('/api/bundles', passport.authenticate('bearer', { session: false }), get);
-    app.get('/api/bundles/:id', passport.authenticate('bearer', { session: false }), getById);
-    app.post('/api/bundles', passport.authenticate('bearer', { session: false }), post);
-    app.put('/api/bundles/:id', passport.authenticate('bearer', { session: false }), put);
-    app.delete('/api/bundles/:id', passport.authenticate('bearer', { session: false }), remove);
+    app.get('/api/bundles', passport.authenticate('bearer', { session: false }), exports.get);
+    app.get('/api/bundles/:id', passport.authenticate('bearer', { session: false }), exports.getById);
+    app.post('/api/bundles', passport.authenticate('bearer', { session: false }), exports.post);
+    app.put('/api/bundles/:id', passport.authenticate('bearer', { session: false }), exports.put);
+    app.delete('/api/bundles/:id', passport.authenticate('bearer', { session: false }), exports.remove);
 }

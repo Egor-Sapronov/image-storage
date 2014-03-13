@@ -5,7 +5,7 @@ var fs = require('fs');
 var join = path.join;
 var passport = require('passport');
 
-get = function (req, res) {
+exports.get = function (req, res) {
     return Image.find({}, function (err, images) {
         if (!err) return res.send(images);
         else {
@@ -16,7 +16,7 @@ get = function (req, res) {
     });
 }
 
-post = function (dir) {
+exports.post = function (dir) {
     return function (req, res, next) {
         log.info(JSON.stringify(req.files))
         var img = req.files.image.file;
@@ -41,7 +41,7 @@ post = function (dir) {
     };
 };
 
-getById = function (req, res) {
+exports.getById = function (req, res) {
     return Image.findById(req.params.id, function (err, image) {
         if (!image) {
             res.statusCode = 500;
@@ -57,18 +57,18 @@ getById = function (req, res) {
     });
 }
 
-put = function (req, res) {
+exports.put = function (req, res) {
     res.send('Not implemented.');
 };
 
-remove = function (req, res) {
+exports.remove = function (req, res) {
     res.send('Not implemented.');
 };
 
 exports.setEndPoints = function (app) {
-    app.get('/api/images', passport.authenticate('bearer', { session: false }), get);
-    app.get('/api/images/:id', passport.authenticate('bearer', { session: false }), getById);
-    app.post('/api/images', passport.authenticate('bearer', { session: false }), post(app.get('images')));
-    app.put('/api/images/:id', passport.authenticate('bearer', { session: false }), put);
-    app.delete('/api/images/:id', passport.authenticate('bearer', { session: false }), remove);
+    app.get('/api/images', passport.authenticate('bearer', { session: false }), exports.get);
+    app.get('/api/images/:id', passport.authenticate('bearer', { session: false }), exports.getById);
+    app.post('/api/images', passport.authenticate('bearer', { session: false }), exports.post(app.get('images')));
+    app.put('/api/images/:id', passport.authenticate('bearer', { session: false }), exports.put);
+    app.delete('/api/images/:id', passport.authenticate('bearer', { session: false }), exports.remove);
 };

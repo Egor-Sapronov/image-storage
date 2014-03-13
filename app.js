@@ -11,6 +11,7 @@ var bundlesApi = require('./routes/api/bundles');
 var passport = require('passport');
 var oauth2 = require('./libs/oauth2');
 var config = require('./libs/config');
+require('./libs/oauth');
 
 var app = express();
 
@@ -35,14 +36,12 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-require('./libs/oauth');
-
 app.post('/oauth/token', oauth2.token);
 app.post('/oauth/register', oauth2.register);
 
 imagesApi.setEndPoints(app);
 
-bundlesApi.setEndPoints(app);
+//bundlesApi.setEndPoints(app);
 
 app.get('/', function (req, res) {
     res.sendfile('index.html');
