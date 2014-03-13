@@ -41,7 +41,7 @@ app.post('/oauth/register', oauth2.register);
 
 imagesApi.setEndPoints(app);
 
-//bundlesApi.setEndPoints(app);
+bundlesApi.setEndPoints(app);
 
 app.get('/', function (req, res) {
     res.sendfile('index.html');
