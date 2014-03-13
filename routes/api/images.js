@@ -30,6 +30,7 @@ exports.post = function (dir) {
 
             image.name = name;
             image.path = fileName;
+            image.userId = req.user.userId;
             image.save(function (err) {
                 if (err) return next(err);
                 fs.rename(img.path, path, function (err) {
