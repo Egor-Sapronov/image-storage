@@ -5,16 +5,33 @@ var fs = require('fs');
 var join = path.join;
 var passport = require('passport');
 var UserModel = require('../../models/models').User;
-var ClientModel = require('../../models/models').Client;
-var AccessTokenModel = require('../../models/models').AccessToken;
-var RefreshTokenModel = require('../../models/models').RefreshToken;
 
 exports.get = function (req, res) {
     res.send('Not implemented');
 };
 
 exports.post = function (req, res) {
-    res.send('Not implemented');
+    var user = new UserModel({
+        username: req.body.username,
+        password: req.body.password
+    });
+
+    user.save(function (err, user) {
+        if (!err) {
+            log.info("New user - %s:%s", user.username, user.password);
+            res.send({status: 'OK', userName: user.username});
+        } else {
+            console.log(err);
+            if (err.name == 'ValidationError') {
+                res.statusCode = 400;
+                return res.send({ error: 'Validation error' });
+            } else {
+                res.statusCode = 500;
+                return res.send({ error: 'Server error' });
+            }
+            log.error('Internal error(%d): %s', res.statusCode, err.message);
+        }
+    });
 };
 
 exports.getById = function (req, res) {
