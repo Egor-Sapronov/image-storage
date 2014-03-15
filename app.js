@@ -8,6 +8,7 @@ var path = require('path');
 var log = require('./libs/log')(module);
 var imagesApi = require('./routes/api/images');
 var bundlesApi = require('./routes/api/bundles');
+var usersApi = require('./routes/api/users');
 var passport = require('passport');
 var oauth2 = require('./libs/oauth2');
 var config = require('./libs/config');
@@ -52,6 +53,13 @@ imagesApi.setEndPoints(app);
 // UPDATE: /api/bundles/:id
 // DELETE: /api/bundles/:id
 bundlesApi.setEndPoints(app);
+
+// GET: /api/users
+// GET: /api/users/:id
+// POST: /api/users
+// UPDATE: /api/users/:id
+// DELETE: /api/users/:id
+usersApi.setEndPoints(app);
 
 app.get('/', function (req, res) {
     res.sendfile('index.html');

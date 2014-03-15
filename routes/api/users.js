@@ -46,10 +46,11 @@ exports.delete = function (req, res) {
     res.send('Not implemented');
 };
 
-exports.setEndPoints=function(app){
-    app.get('/api/users',exports.get);
-    app.get('/api/users',exports.getById);
-    app.post('/api/users',exports.post);
-    app.put('/api/users',exports.put);
-    app.delete('/api/users',exports.delete);
+//Set endpoints to express app
+exports.setEndPoints = function (app) {
+    app.get('/api/users', exports.get);
+    app.get('/api/users', exports.getById);
+    app.post('/api/users', exports.post);
+    app.put('/api/users', exports.put);
+    app.delete('/api/users', exports.delete);
 }
