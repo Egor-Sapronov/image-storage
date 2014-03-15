@@ -66,6 +66,7 @@ exports.remove = function (req, res) {
     res.send('Not implemented.');
 };
 
+//Set endpoints to express app
 exports.setEndPoints = function (app) {
     app.get('/api/images', passport.authenticate('bearer', { session: false }), exports.get);
     app.get('/api/images/:id', passport.authenticate('bearer', { session: false }), exports.getById);
