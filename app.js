@@ -39,8 +39,18 @@ if ('development' == app.get('env')) {
 app.post('/oauth/token', oauth2.token);
 app.post('/oauth/register', oauth2.register);
 
+// GET: /api/images
+// GET: /api/images/:id
+// POST: /api/images
+// UPDATE: /api/images/:id
+// DELETE: /api/images/:id
 imagesApi.setEndPoints(app);
 
+// GET: /api/bundles
+// GET: /api/bundles/:id
+// POST: /api/bundles
+// UPDATE: /api/bundles/:id
+// DELETE: /api/bundles/:id
 bundlesApi.setEndPoints(app);
 
 app.get('/', function (req, res) {
