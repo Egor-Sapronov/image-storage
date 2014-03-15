@@ -6,7 +6,6 @@ var BearerStrategy = require('passport-http-bearer').Strategy;
 var UserModel = require('../models/models').User;
 var ClientModel = require('../models/models').Client;
 var AccessTokenModel = require('../models/models').AccessToken;
-var RefreshTokenModel = require('../models/models').RefreshToken;
 
 passport.use(new BasicStrategy(
     function (username, password, done) {
@@ -53,12 +52,6 @@ passport.use(new BearerStrategy(
             if (!token) {
                 return done(null, false);
             }
-//            if (Math.round((Date.now() - token.created) / 1000) > config.get('security:tokenLife')) {
-//                AccessTokenModel.remove({token: accessToken}, function (err) {
-//                    if (err) return done(err);
-//                });
-//                return done(null, false, {message: 'Token expired'});
-//            }
 
             UserModel.findById(token.userId, function (err, user) {
                 if (err) {

@@ -116,25 +116,3 @@ var accessToken = new mongoose.Schema({
 });
 
 exports.AccessToken = mongoose.model('accessToken', accessToken);
-
-var refreshToken = new mongoose.Schema({
-    userId: {
-        type: String,
-        required: true
-    },
-    clientId: {
-        type: String,
-        required: true
-    },
-    token: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    created: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-exports.RefreshToken = mongoose.model('refreshToken', refreshToken);
