@@ -19,7 +19,7 @@ var Bundles = Backbone.Collection.extend({
 var UserModel = Backbone.Model.extend({
     defaults: {
         'grant_type': 'password',
-        'client_id': 'mobileV1',
+        'client_id': 'webV1',
         'client_secret': 'abc123456'
     },
     url: 'oauth/token'
@@ -28,7 +28,7 @@ var UserModel = Backbone.Model.extend({
 var TokenModel = Backbone.Model.extend({
     defaults: {
         'grant_type': 'refresh_token',
-        'client_id': 'mobileV1',
+        'client_id': 'webV1',
         'client_secret': 'abc123456'
     },
 
