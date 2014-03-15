@@ -18,7 +18,7 @@ db.once('open', function callback() {
 var image = new mongoose.Schema({
     name: String,
     path: String,
-    userId:String
+    userId: String
 });
 
 exports.Image = mongoose.model('image', image);
@@ -26,7 +26,7 @@ exports.Image = mongoose.model('image', image);
 var bundle = new mongoose.Schema({
     name: String,
     imagesId: [],
-    userId:String
+    userId: String
 });
 
 exports.Bundle = mongoose.model('bundle', bundle);
