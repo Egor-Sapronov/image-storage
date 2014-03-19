@@ -25,6 +25,10 @@ var UserModel = Backbone.Model.extend({
     url: 'oauth/token'
 });
 
+var UserLogedModel = Backbone.Model.extend({
+    url: 'oauth/user'
+});
+
 var TokenModel = Backbone.Model.extend({
     defaults: {
         'grant_type': 'refresh_token',
