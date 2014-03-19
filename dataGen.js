@@ -3,11 +3,10 @@ var mongoose = require('mongoose');
 var UserModel = require('./models/models').User;
 var ClientModel = require('./models/models').Client;
 var AccessTokenModel = require('./models/models').AccessToken;
-var RefreshTokenModel = require('./models/models').RefreshToken;
 var faker=require('Faker');
 
 UserModel.remove({}, function(err) {
-    var user = new UserModel({ username: "andrey", password: "simplepassword" });
+    var user = new UserModel({ username: "egor", password: "239980" });
     user.save(function(err, user) {
         if(err) return log.error(err);
         else log.info("New user - %s:%s",user.username,user.password);
@@ -30,9 +29,6 @@ ClientModel.remove({}, function(err) {
     });
 });
 AccessTokenModel.remove({}, function (err) {
-    if (err) return log.error(err);
-});
-RefreshTokenModel.remove({}, function (err) {
     if (err) return log.error(err);
 });
 
