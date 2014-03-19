@@ -7,8 +7,6 @@ var Images = Backbone.View.extend({
 
     initialize: function () {
         this.images = new ImagesCollection();
-        var self = this;
-        self.images.fetch();
     },
 
     render: function () {
