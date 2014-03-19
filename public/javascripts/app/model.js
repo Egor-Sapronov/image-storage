@@ -25,7 +25,7 @@ var UserModel = Backbone.Model.extend({
     url: 'oauth/token'
 });
 
-var UserLogedModel = Backbone.Model.extend({
+var UserLoggedModel = Backbone.Model.extend({
     url: 'oauth/user'
 });
 

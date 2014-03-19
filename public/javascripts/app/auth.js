@@ -12,7 +12,6 @@ var auth = {
 };
 
 $(document).ready(function () {
-    alert(auth.getAccessToken());
     $.ajaxSetup({
         headers: { 'Authorization': 'Bearer ' + auth.getAccessToken() }
     });

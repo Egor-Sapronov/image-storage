@@ -60,7 +60,7 @@ exports.register = function (req, res) {
 };
 
 exports.userInfo = function (req, res) {
-    res.json({name: req.user.userName});
+    res.send({name: req.user.username});
 };
 
 

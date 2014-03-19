@@ -70,11 +70,14 @@ var LogIn = Backbone.View.extend({
 });
 
 var LogInSuccess = Backbone.View.extend({
-    el:$('#auth'),
+    el: $('#auth'),
 
     template: _.template($('#loginSuccess').html()),
 
-    render:function(){
+    user: new UserLoggedModel(),
+
+    render: function () {
+        this.user.fetch();
         $(this.el).html(this.template());
     }
 });
@@ -84,6 +87,6 @@ Views = {
     bundles: new Bundles(),
     login: new LogIn(),
     upload: new Upload(),
-    logon:new LogInSuccess()
+    logon: new LogInSuccess()
 
 };
