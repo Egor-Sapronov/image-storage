@@ -47,7 +47,6 @@ var Bundles = Backbone.View.extend({
 
 var LogIn = Backbone.View.extend({
     el: $('#auth'),
-
     template: _.template($('#login').html()),
 
     user: new UserModel(),
@@ -60,10 +59,22 @@ var LogIn = Backbone.View.extend({
         this.user.set({username: $('#name').val(), password: $('#password').val()});
         this.user.save().success(function (model, res) {
             auth.setAccessToken(model.access_token);
+            Views.logon.render();
         });
     },
 
     render: function () {
+        $(this.el).html(this.template());
+
+    }
+});
+
+var LogInSuccess = Backbone.View.extend({
+    el:$('#auth'),
+
+    template: _.template($('#loginSuccess').html()),
+
+    render:function(){
         $(this.el).html(this.template());
     }
 });
@@ -72,5 +83,7 @@ Views = {
     images: new Images(),
     bundles: new Bundles(),
     login: new LogIn(),
-    upload: new Upload()
+    upload: new Upload(),
+    logon:new LogInSuccess()
+
 };
