@@ -41,7 +41,6 @@ server.exchange(oauth2rize.exchange.password(function (client, username, passwor
     });
 }));
 
-// token endpoint
 exports.token = [
     passport.authenticate(['basic', 'oauth2-client-password'], {session: false}),
     server.token(),
@@ -58,6 +57,10 @@ exports.register = function (req, res) {
             res.send({status: 'OK'});
         }
     });
+};
+
+exports.userInfo = function (req, res) {
+    res.json({name: req.user.userName});
 };
 
 
