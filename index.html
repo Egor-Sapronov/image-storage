@@ -61,6 +61,7 @@
     <div>
         <ul><% _.each(images, function(image) { %>
             <li><%=image.name%></li>
+            <img src='/images/<%=image.path%>'></img>
             <%});%>
         </ul>
     </div>
@@ -72,9 +73,7 @@
         <input id="filename" name="image[name]" type="text" class="form-control" placeholder="Filename" required
                autofocus>
         <input id="userPhotoInput" type="file" name="image[file]" class="form-control" required>
-
         <p>
-
         <p>
             <input type="submit" value="Upload" class="btn btn-lg btn-primary btn-block"></input>
     </form>
