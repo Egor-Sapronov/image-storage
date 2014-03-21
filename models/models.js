@@ -18,7 +18,7 @@ db.once('open', function callback() {
 var image = new mongoose.Schema({
     name: String,
     path: String,
-    userId: String
+    _user: {type: mongoose.Schema.ObjectId, ref: 'user'}
 });
 
 exports.Image = mongoose.model('image', image);

@@ -6,15 +6,18 @@ var join = path.join;
 var passport = require('passport');
 
 exports.get = function (req, res) {
-    return Image.find({}, function (err, images) {
-        if (!err) return res.send(images);
-        else {
-            res.statusCode = 500;
-            log.error('Internal error(%d): %s', res.statusCode, err.message);
-            return res.send({ error: 'Server error' });
-        }
-    });
-}
+    return Image.find({})
+        .populate('_user', 'username')
+        .select('name path _user')
+        .exec(function (err, images) {
+            if (!err) return res.send(images);
+            else {
+                res.statusCode = 500;
+                log.error('Internal error(%d): %s', res.statusCode, err.message);
+                return res.send({ error: 'Server error' });
+            }
+        });
+};
 
 exports.post = function (dir) {
     return function (req, res, next) {
@@ -30,7 +33,7 @@ exports.post = function (dir) {
 
             image.name = name;
             image.path = fileName;
-            image.userId = req.user.userId;
+            image._user = req.user.userId;
             image.save(function (err) {
                 if (err) return next(err);
                 fs.rename(img.path, path, function (err) {
@@ -67,7 +70,7 @@ exports.remove = function (req, res) {
 };
 
 exports.setEndPoints = function (app) {
-    app.get('/api/images', passport.authenticate('bearer', { session: false }), exports.get);
+    app.get('/api/images', exports.get);
     app.get('/api/images/:id', passport.authenticate('bearer', { session: false }), exports.getById);
     app.post('/api/images', passport.authenticate('bearer', { session: false }), exports.post(app.get('images')));
     app.put('/api/images/:id', passport.authenticate('bearer', { session: false }), exports.put);
