@@ -46,7 +46,6 @@ exports.delete = function (req, res) {
     res.send('Not implemented');
 };
 
-//Set endpoints to express app
 exports.setEndPoints = function (app) {
     app.get('/api/users', exports.get);
     app.get('/api/users', exports.getById);
