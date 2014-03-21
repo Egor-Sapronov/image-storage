@@ -11,9 +11,9 @@ var auth = {
     }
 };
 
-$(document).ready(function () {
-    $.ajaxSetup({
-        headers: { 'Authorization': 'Bearer ' + auth.getAccessToken() }
-    });
+
+$.ajaxSetup({
+    headers: { 'Authorization': 'Bearer ' + auth.getAccessToken() }
 });
+
 
