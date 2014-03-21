@@ -8,20 +8,20 @@ var Controller = Backbone.Router.extend({
     images: function () {
         if (Views.images != null) {
             Views.images.render();
-            LogIn();
         }
     },
     bundles: function () {
         if (Views.bundles != null) {
             Views.bundles.render();
-            LogIn();
         }
     },
     upload: function () {
         if (Views.upload != null) {
             Views.upload.render();
-            LogIn();
         }
+    },
+    initialize: function (options) {
+        LogIn();
     }
 });
 
