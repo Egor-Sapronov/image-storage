@@ -10,9 +10,11 @@ var Images = Backbone.View.extend({
     },
 
     render: function () {
-        var self = this;
-        self.images.fetch();
-        $(this.el).html(this.template({images: this.images.toJSON()}));
+        var self=this;
+        self.images.fetch().success(function(model,res){
+            $(self.el).html(self.template({images: self.images.toJSON()}));
+        });
+
     },
 
     events: {
