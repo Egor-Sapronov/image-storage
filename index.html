@@ -27,20 +27,32 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#!/">Upload</a>
-            <a class="navbar-brand" href="#!/images">Images</a>
-            <a class="navbar-brand" href="#!/bundles">Bundles</a>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <div id="menu">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="active"><a href="#">Images</a></li>
+                    <li><a href="#">Bundles</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Image</a></li>
+                            <li><a href="#">Bundle</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="auth">
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username">
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">LogIn</button>
+                </form>
+            </div>
         </div>
-        <div class="navbar-collapse collapse" id="auth">
-        </div>
-        <!--/.navbar-collapse -->
     </div>
 </div>
 
@@ -56,6 +68,30 @@
         <p class="text-muted">footer</p>
     </div>
 </div>
+
+<script type="text/template" id="nav">
+    <ul class="nav navbar-nav navbar-left">
+        <li class="active"><a href="#">Images</a></li>
+        <li><a href="#">Bundles</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Image</a></li>
+                <li><a href="#">Bundle</a></li>
+            </ul>
+        </li>
+    </ul>
+</script>
+
+<script type="text/template" id="logIn">
+    <form class="navbar-form navbar-right">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username">
+            <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">LogIn</button>
+    </form>
+</script>
 
 <!--<script type="text/template" id="images">-->
 <!--<div>-->
