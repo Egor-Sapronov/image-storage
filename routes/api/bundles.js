@@ -20,7 +20,7 @@ exports.get = function (req, res) {
 exports.post = function (req, res) {
     var bundle = new Bundle({
         name: req.body.name,
-        imagesId: req.body.imagesId,
+        images: req.body.imagesId,
         userId: req.user.userId
     });
 

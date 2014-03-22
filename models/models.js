@@ -25,7 +25,9 @@ exports.Image = mongoose.model('image', image);
 
 var bundle = new mongoose.Schema({
     name: String,
-    imagesId: [],
+    images: [
+        {type: mongoose.Schema.ObjectId, ref: 'image'}
+    ],
     userId: String
 });
 

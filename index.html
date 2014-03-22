@@ -61,6 +61,7 @@
     <div>
         <ul><% _.each(images, function(image) { %>
             <li><%=image.name%></li>
+            <li><%=image._user.username%></li>
             <img src='/images/<%=image.path%>'></img>
             <%});%>
         </ul>
