@@ -57,70 +57,70 @@
     </div>
 </div>
 
-<script type="text/template" id="images">
-    <div>
-        <ul><% _.each(images, function(image) { %>
-            <li><%=image.name%></li>
-            <li><%=image._user.username%></li>
-            <img src='/images/<%=image.path%>'></img>
-            <%});%>
-        </ul>
-    </div>
-</script>
+<!--<script type="text/template" id="images">-->
+<!--<div>-->
+<!--<ul><% _.each(images, function(image) { %>-->
+<!--<li><%=image.name%></li>-->
+<!--<li><%=image._user.username%></li>-->
+<!--<img src='/images/<%=image.path%>'></img>-->
+<!--<%});%>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</script>-->
 
-<script type="text/template" id="upload">
-    <form id="uploadForm" action="/api/images" enctype="multipart/form-data" method="post" class="form-upload">
-        <h2 class="form-upload-heading">Upload a file</h2>
-        <input id="filename" name="image[name]" type="text" class="form-control" placeholder="Filename" required
-               autofocus>
-        <input id="userPhotoInput" type="file" name="image[file]" class="form-control" required>
+<!--<script type="text/template" id="upload">-->
+<!--<form id="uploadForm" action="/api/images" enctype="multipart/form-data" method="post" class="form-upload">-->
+<!--<h2 class="form-upload-heading">Upload a file</h2>-->
+<!--<input id="filename" name="image[name]" type="text" class="form-control" placeholder="Filename" required-->
+<!--autofocus>-->
+<!--<input id="userPhotoInput" type="file" name="image[file]" class="form-control" required>-->
 
-        <p>
+<!--<p>-->
 
-        <p>
-            <input type="submit" value="Upload" class="btn btn-lg btn-primary btn-block">
-    </form>
-</script>
+<!--<p>-->
+<!--<input type="submit" value="Upload" class="btn btn-lg btn-primary btn-block">-->
+<!--</form>-->
+<!--</script>-->
 
-<script type="text/template" id="bundles">
-    <div class="row">
-        <div class="col-xs-6 col-md-4">Bundles</div>
-        <div class="col-xs-6 col-md-4">
-            <ul class="list-group"><% _.each(images, function(image) { %>
-                <li class="list-group-item">
-                    <%=image.name%>
-                    <%=image._user.username%>
-                    <img class="img-rounded" src='/images/<%=image.path%>'>
-                </li>
-                <%});%>
-            </ul>
-        </div>
-        <div class="col-xs-6 col-md-4">New bundle</div>
-    </div>
-</script>
+<!--<script type="text/template" id="bundles">-->
+<!--<div class="row">-->
+<!--<div class="col-xs-6 col-md-4">Bundles</div>-->
+<!--<div class="col-xs-6 col-md-4">-->
+<!--<ul class="list-group"><% _.each(images, function(image) { %>-->
+<!--<li class="list-group-item">-->
+<!--<%=image.name%>-->
+<!--<%=image._user.username%>-->
+<!--<img class="img-rounded" src='/images/<%=image.path%>'>-->
+<!--</li>-->
+<!--<%});%>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="col-xs-6 col-md-4">New bundle</div>-->
+<!--</div>-->
+<!--</script>-->
 
-<script type="text/template" id="login">
-    <div class="navbar-form navbar-right">
-        <div class="form-group">
-            <input type="text" id="name" placeholder="Name" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="password" id="password" placeholder="Password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-success">Sign in</button>
-    </div>
-</script>
-<script type="text/template" id="loginSuccess">
-    <div class="navbar-form navbar-right">
-        <div class="form-group">
-            <p>Hello
-        </div>
-        <div class="form-group">
-            <p>User
-        </div>
-        <button type="submit" class="btn btn-success">LogOff</button>
-    </div>
-</script>
+<!--<script type="text/template" id="login">-->
+<!--<div class="navbar-form navbar-right">-->
+<!--<div class="form-group">-->
+<!--<input type="text" id="name" placeholder="Name" class="form-control">-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--<input type="password" id="password" placeholder="Password" class="form-control">-->
+<!--</div>-->
+<!--<button type="submit" class="btn btn-success">Sign in</button>-->
+<!--</div>-->
+<!--</script>-->
+<!--<script type="text/template" id="loginSuccess">-->
+<!--<div class="navbar-form navbar-right">-->
+<!--<div class="form-group">-->
+<!--<p>Hello-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--<p>User-->
+<!--</div>-->
+<!--<button type="submit" class="btn btn-success">LogOff</button>-->
+<!--</div>-->
+<!--</script>-->
 
 
 <!-- Bootstrap core JavaScript
@@ -131,9 +131,6 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
-<script src="/javascripts/app/auth.js"></script>
-<script src="/javascripts/app/model.js"></script>
-<script src="/javascripts/app/view.js"></script>
-<script src="/javascripts/app/controller.js"></script>
+<script src="/javascripts/libs/auth.js"></script>
 </body>
 </html>
