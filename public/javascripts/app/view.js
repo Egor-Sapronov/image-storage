@@ -10,11 +10,10 @@ var Images = Backbone.View.extend({
     },
 
     render: function () {
-        var self=this;
-        self.images.fetch().success(function(model,res){
+        var self = this;
+        self.images.fetch().success(function (model, res) {
             $(self.el).html(self.template({images: self.images.toJSON()}));
         });
-
     },
 
     events: {
@@ -40,10 +39,25 @@ var Upload = Backbone.View.extend({
 var Bundles = Backbone.View.extend({
     el: $('#main'),
 
+    initialize: function () {
+        this.images = new ImagesCollection();
+    },
+
+    events:{
+        'click .list-group-item':'add'
+    },
+
     template: _.template($('#bundles').html()),
 
+    add:function(){
+        alert('asf');
+    },
+
     render: function () {
-        $(this.el).html(this.template());
+        var self = this;
+        self.images.fetch().success(function (model, res) {
+            $(self.el).html(self.template({images: self.images.toJSON()}));
+        });
     }
 });
 

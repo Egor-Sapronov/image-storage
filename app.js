@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var http = require('http');
-var images = require('./routes/images');
 var path = require('path');
 var log = require('./libs/log')(module);
 var imagesApi = require('./routes/api/images');
