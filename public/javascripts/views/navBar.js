@@ -7,8 +7,9 @@ var NavBar = Backbone.View.extend({
         'click li': 'setActive'
     },
 
-    setActive: function () {
-        this.$('.li').removeClass('active');
+    setActive: function (event) {
+        this.$('li').removeClass('active');
+        this.$(event.currentTarget).addClass('active');
     },
 
     render: function () {
