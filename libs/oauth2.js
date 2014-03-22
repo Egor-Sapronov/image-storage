@@ -59,8 +59,21 @@ exports.register = function (req, res) {
     });
 };
 
+exports.logOff = function (req, res) {
+    AccessTokenModel.remove({userId: req.user.userId}, function (err) {
+        log.info(req.user.userId);
+        if (err) {
+            log.error(err);
+            res.statusCode = 500;
+            return res.send({ error: 'Server error' });
+        } else {
+            res.send({status: 'OK'});
+        }
+    });
+};
+
 exports.userInfo = function (req, res) {
-    res.send({name: req.user.username});
+    res.send({name: req.user.username, id: req.user.userId});
 };
 
 

@@ -1,17 +1,19 @@
 var AuthView = Backbone.View.extend({
     el: $('#auth'),
 
-    userLogIn: new LogInModel(),
-
-    user: new UserModel(),
-
     templates: {
         'logIn': _.template($('#logIn').html()),
         'loggedIn': _.template($('#loggedIn').html())
     },
 
     events: {
-        'click #logInButton': 'logIn'
+        'click #logInButton': 'logIn',
+        'click #logOffButton': 'logOff'
+    },
+
+    initialize: function () {
+        this.userLogIn = new LogInModel();
+        this.user = new UserModel();
     },
 
     logIn: function () {
@@ -20,8 +22,21 @@ var AuthView = Backbone.View.extend({
         this.userLogIn.save()
             .success(function (model, res) {
                 auth.setAccessToken(model.access_token);
-                $(self.el).html(self.templates['loggedIn']());
+                self.user.set({name: self.userLogIn.get('username')});
+                $(self.el).html(self.templates['loggedIn']({user: self.user.toJSON()}));
             });
+    },
+
+    logOff: function () {
+        var self = this;
+        $.ajax({
+            type: 'POST',
+            url: '/oauth/logoff',
+            data: this.user.toJSON(),
+            success: function () {
+                $(self.el).html(self.templates['logIn']());
+            }
+        });
     },
 
     render: function () {
@@ -31,7 +46,7 @@ var AuthView = Backbone.View.extend({
                 $(self.el).html(self.templates['logIn']());
             })
             .success(function (model, res) {
-                $(self.el).html(self.templates['loggedIn']({user:self.user.toJSON()}));
+                $(self.el).html(self.templates['loggedIn']({user: self.user.toJSON()}));
             });
     }
 });

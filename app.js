@@ -39,6 +39,7 @@ if ('development' == app.get('env')) {
 app.post('/oauth/token', oauth2.token);
 app.post('/oauth/register', oauth2.register);
 app.get('/oauth/user', passport.authenticate('bearer', { session: false }), oauth2.userInfo);
+app.post('/oauth/logoff', passport.authenticate('bearer', { session: false }), oauth2.logOff);
 
 // GET: /api/images
 // GET: /api/images/:id
