@@ -3,6 +3,9 @@ var Controller = Backbone.Router.extend({
         if (Views.navBar != null) {
             Views.navBar.render();
         }
+        if (Views.auth != null) {
+            Views.auth.render();
+        }
     }
 });
 

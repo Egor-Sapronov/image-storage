@@ -1,3 +1,4 @@
 var Views = {
-    navBar: new NavBar()
+    navBar: new NavBar(),
+    auth: new AuthView()
 };
