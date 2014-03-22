@@ -4,5 +4,5 @@ var LogInModel = Backbone.Model.extend({
         'client_id': 'webV1',
         'client_secret': 'abc123456'
     },
-    url: 'oauth/token'
+    url: '/oauth/token'
 });
