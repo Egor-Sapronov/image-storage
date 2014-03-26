@@ -10,3 +10,7 @@ var LogInModel = Backbone.Model.extend({
     },
     url: '/oauth/token'
 });
+
+var ImageModel = Backbone.Model.extend({
+    url: '/api/images'
+});
