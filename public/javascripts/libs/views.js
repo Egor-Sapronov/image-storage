@@ -3,5 +3,6 @@ var Views = {
     auth: new AuthView(),
     images: new ImagesView(),
     bundles: new BundlesView(),
-    upload: new UploadView()
+    upload: new UploadView(),
+    createBundle: new CreateBundleView()
 };
