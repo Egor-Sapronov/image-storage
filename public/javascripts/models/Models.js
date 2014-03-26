@@ -1,3 +1,7 @@
+var UserModel = Backbone.Model.extend({
+    url: 'oauth/user'
+});
+
 var LogInModel = Backbone.Model.extend({
     defaults: {
         'grant_type': 'password',
