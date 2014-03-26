@@ -14,3 +14,8 @@ var LogInModel = Backbone.Model.extend({
 var ImageModel = Backbone.Model.extend({
     url: '/api/images'
 });
+
+var ImagesCollection = Backbone.Collection.extend({
+    model: ImageModel,
+    url: '/api/images'
+});
