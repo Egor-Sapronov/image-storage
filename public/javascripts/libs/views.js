@@ -1,5 +1,5 @@
 var Views = {
-    navBar: new NavBar(),
+    navBar: new NavBarView(),
     auth: new AuthView(),
-    images:new Images()
+    images: new ImagesView()
 };

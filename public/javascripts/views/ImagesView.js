@@ -1,4 +1,4 @@
-var Images = Backbone.View.extend({
+var ImagesView = Backbone.View.extend({
     el: $('#main'),
 
     template: _.template($('#images').html()),
