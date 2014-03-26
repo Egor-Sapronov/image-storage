@@ -50,3 +50,71 @@ var AuthView = Backbone.View.extend({
             });
     }
 });
+
+var BundlesView = Backbone.View.extend({
+    el: $('#main'),
+
+    template: _.template($('#bundles').html()),
+
+    render: function () {
+        $(this.el).html(this.template());
+    }
+});
+
+var CreateBundleView = Backbone.View.extend({
+    el: $('#main'),
+
+    template: _.template($('#createBundle').html()),
+
+    render: function () {
+        $(this.el).html(this.template());
+    }
+});
+
+var ImagesView = Backbone.View.extend({
+    el: $('#main'),
+
+    template: _.template($('#images').html()),
+
+    render: function () {
+        $(this.el).html(this.template());
+    }
+});
+
+var NavBarView = Backbone.View.extend({
+    el: $('#menu'),
+
+    template: _.template($('#nav').html()),
+
+    events: {
+        'click li': 'setActive'
+    },
+
+    setActive: function (event) {
+        this.$('li').removeClass('active');
+        this.$(event.currentTarget).addClass('active');
+    },
+
+    render: function () {
+        $(this.el).html(this.template());
+    }
+});
+
+var UploadView = Backbone.View.extend({
+    el: $('#main'),
+
+    template: _.template($('#upload').html()),
+
+    render: function () {
+        $(this.el).html(this.template());
+    }
+});
+
+var Views = {
+    navBar: new NavBarView(),
+    auth: new AuthView(),
+    images: new ImagesView(),
+    bundles: new BundlesView(),
+    upload: new UploadView(),
+    createBundle: new CreateBundleView()
+};
