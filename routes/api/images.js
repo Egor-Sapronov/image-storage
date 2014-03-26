@@ -21,9 +21,10 @@ exports.get = function (req, res) {
 
 exports.post = function (dir) {
     return function (req, res, next) {
-        log.info(JSON.stringify(req.files))
-        var img = req.files.image.file;
-        var name = req.body.image.name || img.name;
+        log.info(JSON.stringify(req.files));
+        
+        var img = req.files.file;
+        var name = img.name;
         var ext = img.name.split('.').pop();
 
         var image = new Image();

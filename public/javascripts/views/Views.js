@@ -105,6 +105,24 @@ var UploadView = Backbone.View.extend({
 
     template: _.template($('#upload').html()),
 
+    events: {
+        'click #uploadButton': 'upload'
+    },
+
+    upload: function () {
+        var selectedFile = $('#file').get(0).files[0];
+        var formData = new FormData();
+
+        formData.append('file',selectedFile);
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/api/images', true);
+        xhr.setRequestHeader('Authorization', 'Bearer ' + auth.getAccessToken());
+        xhr.send(formData);
+
+    },
+
     render: function () {
         $(this.el).html(this.template());
     }
